@@ -3,6 +3,7 @@ import Home from "./Home";
 import ErrorPage from "./error-page";
 import HireMe from "./HireMe";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/hireMe" element={<HireMe/>} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }
