@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex justify-between min-h-screen bg-[#F0F0F6]">
       <div className="flex flex-col items-center p-[4rem] h-max  bg-white min-w-[15%]">
-        <div className="relative hover:rotate-180 transition-all  shadow-md rounded-full  h-[9.3rem] w-[9.3rem]">
+        <div className="relative hover:rotate-[360deg] transition-all  shadow-md rounded-full  h-[9.3rem] w-[9.3rem]">
           <img
             src="passport.jpg"
             alt=""
