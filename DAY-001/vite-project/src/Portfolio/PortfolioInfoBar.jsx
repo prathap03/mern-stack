@@ -205,7 +205,7 @@ export default function PortfolioInfoBar() {
     <div className="flex bg-[#F0F0F6] shadow-md mt-5 h-[0.1rem] w-[120%]"></div>
 
     <button className="bg-[#FFB400] p-2 mt-2 w-[120%]">
-      <a className='w-[100%] h-[100%]' href="/public/Joe Prathap P J-Resume.pdf">
+      <a className='w-[100%] h-[100%]' href="/Joe Prathap P J-Resume.pdf">
       <div className="flex text-[0.875rem] font-[600] justify-evenly items-center">
         <p>DOWNLOAD CV</p>
         <svg
