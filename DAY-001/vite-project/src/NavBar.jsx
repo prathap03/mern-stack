@@ -7,6 +7,7 @@ export default function NavBar() {
         <Link className="transition-all hover:text-blue-500" to="/">Home</Link>
           <Link className="transition-all hover:text-blue-500" to="/HireMe">Hire Me</Link>
           <Link className="transition-all hover:text-blue-500" to="/useState">useState</Link>
+          <Link className="transition-all hover:text-blue-500" to="/login">Login</Link>
         </div>
         
    

@@ -5,6 +5,7 @@ import HireMe from "./HireMe";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SetState from "./SetState";
+import Login from "./Login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/hireMe" element={<HireMe/>} />
         <Route path="/useState" element={<SetState/>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
       
