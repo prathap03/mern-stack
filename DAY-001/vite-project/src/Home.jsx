@@ -5,7 +5,7 @@ import PortfolioNavBar from "./Portfolio/PortfolioNavBar";
 
 export default function Home() {
   return (
-    <div className="flex justify-between min-h-screen bg-[#F0F0F6]">
+    <div className="flex justify-between flex-grow bg-[#F0F0F6]">
       <PortfolioInfoBar />
       <PortfolioMain />
       <PortfolioNavBar/>
