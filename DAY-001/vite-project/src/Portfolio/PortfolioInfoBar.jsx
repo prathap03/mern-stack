@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function PortfolioInfoBar() {
   return (
-    <>
-    <div className="flex flex-col items-center p-[4rem] h-max  bg-white min-w-[15%]">
+    
+    <div className="hidden md:flex flex-col items-center p-[4rem] h-max   bg-white min-w-[15%]">
     <div className="relative hover:animate-spin transition-all  shadow-md rounded-full  h-[9.3rem] w-[9.3rem]">
       <img
         src="passport.jpg"
@@ -234,6 +234,6 @@ export default function PortfolioInfoBar() {
       </div>
     </button>
   </div>
-  </>
+  
   )
 }
