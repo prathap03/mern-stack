@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 
 export default function SetState() {
-    const [color,setColor]=useState('red');
+    const [color,setColor]=useState('red-500');
     const handleChange=()=>{
-        color==='red-500'?setColor('blue-500'):setColor('red-500');
+        color==='red-500'?setColor('blue-700'):setColor('red-500');
     }
   return (
     <div className={`flex bg-${color} flex-col items-center justify-center flex-grow `}>
