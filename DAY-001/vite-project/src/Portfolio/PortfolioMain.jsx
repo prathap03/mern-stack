@@ -339,7 +339,7 @@ export default function PortfolioMain() {
               </h1>
             </div>
 
-            <h1 className="w-[90%] text-[0.938rem] leading-[1.5rem] text-[#767676] font-[400] capitalize text-center">
+            <h1 onClick={()=>setSelected(1)}  className="w-[90%] text-[0.938rem] leading-[1.5rem] text-[#767676] font-[400] capitalize text-center">
               For most businesses that want to optimize web queries
             </h1>
 
