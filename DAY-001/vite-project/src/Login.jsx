@@ -27,7 +27,7 @@ export default function Login() {
         animate={{ opacity: 1 }}
         className={`flex  ${
           switchLayout ? " transition-all duration-200" : ""
-        } min-w-[80%] max-h-[40vh] md:max-h-max  md:min-w-[45.5rem] relative max-w-[90%] md:max-w-[37%] bg-white rounded-md shadow-2xl justify-evenly`}
+        } min-w-[80%] max-h-[45vh] md:max-h-max  md:min-w-[45.5rem] relative max-w-[90%] md:max-w-[37%] bg-white rounded-md shadow-2xl justify-evenly`}
       >
         <div
           className={`flex  flex-col items-center justify-center flex-grow  md:gap-2 w-[50%] left-0 h-[100%] p-[1rem] md:p-[2rem] absolute ${

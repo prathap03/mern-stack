@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SetState from "./SetState";
 import Login from "./Login";
+import UseReducer from "./useReducer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/hireMe" element={<HireMe/>} />
         <Route path="/useState" element={<SetState/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/useReducer" element={<UseReducer/>} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
       
