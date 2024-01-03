@@ -4,8 +4,9 @@ import { useMemo, useState } from "react"
 export default function UseMemo() {
   const [square, setSquare] = useState("")
   const [input, setInput] = useState("")
-
+  const muthu = new Audio("https://us-tuna-sounds-files.voicemod.net/2a3cf9a4-f789-42dc-a644-8d88c0a45d78-1660032742044.mp3",{volume:"0.5"})
   const squareNum = useMemo(()=>(num) => {
+    muthu.play()
     setSquare(num*num)
 })
 
