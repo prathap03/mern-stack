@@ -7,6 +7,7 @@ import Footer from "./Footer";
 import SetState from "./SetState";
 import Login from "./Login";
 import UseReducer from "./UseReducer";
+import UseMemo from "./UseMemo";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/useState" element={<SetState/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/useReducer" element={<UseReducer/>} />
+        <Route path="/useMemo" element={<UseMemo/>} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
       

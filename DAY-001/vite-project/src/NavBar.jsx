@@ -9,6 +9,7 @@ export default function NavBar() {
           <Link className="transition-all hover:text-blue-500" to="/useState">useState</Link>
           <Link className="transition-all hover:text-blue-500" to="/login">Login</Link>
           <Link className="transition-all hover:text-blue-500" to="/useReducer">useReducer</Link>
+          <Link className="transition-all hover:text-blue-500" to="/useMemo">useMemo</Link>
         </div>
         
    
