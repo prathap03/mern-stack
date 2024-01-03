@@ -6,7 +6,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SetState from "./SetState";
 import Login from "./Login";
-import UseReducer from "./useReducer";
+import UseReducer from "./UseReducer";
 
 function App() {
   return (
