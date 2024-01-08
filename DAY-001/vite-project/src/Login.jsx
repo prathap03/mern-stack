@@ -1,8 +1,82 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [switchLayout, setSwitchLayout] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
+
+  const SignIn = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      alert("Please fill all the details");
+      return;
+    }
+    const res = await fetch("http://localhost:5000/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    if (res) {
+      const { status, msg, user } = await res.json();
+      console.log(status, msg);
+      if (status == "ok") {
+        localStorage.setItem("token", user);
+        console.log(user);
+        navigate("/");
+        document.location.reload();
+      } else {
+        alert("Error" + JSON.stringify(msg));
+      }
+    } else {
+      alert("Error");
+    }
+  };
+
+  const SignUp = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !password) {
+      alert("Please fill all the details");
+      return;
+    }
+    const res = await fetch("http://localhost:5000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
+    if (res) {
+      const { status, msg } = await res.json();
+      console.log(status, msg);
+      if (status == "ok") {
+        navigate("/");
+      } else {
+        alert("Error" + JSON.stringify(msg));
+      }
+    } else {
+      alert("Error");
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,7 +95,9 @@ export default function Login() {
         </div>
         </div> */}
 
-      <h1 className="font-semibold text-[0.9rem] md:text-[1.5rem]">Sign In/Up Form</h1>
+      <h1 className="font-semibold text-[0.9rem] md:text-[1.5rem]">
+        Sign In/Up Form
+      </h1>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -82,7 +158,7 @@ export default function Login() {
                 : "translate-x-[0%] opacity-100 transition-all duration-700"
             }`}
           >
-            SIGN {!switchLayout ? "UP" : "IN"}
+            SIGN {switchLayout ? "UP" : "IN"}
           </button>
         </div>
         <div
@@ -94,7 +170,9 @@ export default function Login() {
         >
           <form>
             <div className={`flex items-center  justify-center md:mb-2 z-5`}>
-              <h1 className="md:text-[2.2rem] text-[1.5rem] font-semibold">Sign in</h1>
+              <h1 className="md:text-[2.2rem] text-[1.5rem] font-semibold">
+                Sign in
+              </h1>
             </div>
 
             <div className="flex items-center justify-center gap-4 social-container">
@@ -119,13 +197,15 @@ export default function Login() {
             </div>
 
             <div className="w-[100%] md:text-start text-center md:text-[1rem] text-[0.8rem] mt-4 text-gray-600 font-semibold flex justify-center items-center">
-              <h1>or use your email for registration</h1>
+              <h1>or use your email for login</h1>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-4 mt-4">
               <input
                 className="w-[110%] rounded-sm h-[1.4rem] placeholder:text-[0.9rem] placeholder:md:text-[1rem] md:h-[2.5rem]  text-[#333] p-2 md:p-4 bg-[#eee]"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 required
               />
@@ -133,6 +213,8 @@ export default function Login() {
               <input
                 className="w-[110%] rounded-sm h-[1.4rem] placeholder:text-[0.9rem] placeholder:md:text-[1rem] md:h-[2.5rem]  text-[#333] p-2 md:p-4 bg-[#eee]"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 required
               />
@@ -143,7 +225,12 @@ export default function Login() {
             </div>
 
             <div className="flex flex-col items-center justify-center gap-4 ">
-              <button className="md:p-2 p-1 w-[80%] text-white bg-red-500 md:text-[1rem] text-[0.8rem] rounded-full md:w-[50%] mt-5 font-semibold">
+              <button
+                onClick={(e) => {
+                  SignIn(e);
+                }}
+                className="md:p-2 p-1 w-[80%] text-white bg-red-500 md:text-[1rem] text-[0.8rem] rounded-full md:w-[50%] mt-5 font-semibold"
+              >
                 SIGN IN
               </button>
             </div>
@@ -158,7 +245,9 @@ export default function Login() {
           } flex-grow w-[50%] flex-shrink-0 p-[2.5rem]   flex-col items-center bg-white`}
         >
           <form>
-            <h1 className="md:text-[2.2rem]  text-[1.05rem] text-center  font-semibold">Create Account</h1>
+            <h1 className="md:text-[2.2rem]  text-[1.05rem] text-center  font-semibold">
+              Create Account
+            </h1>
 
             <div className="flex items-center justify-center gap-4 social-container">
               <a
@@ -189,12 +278,16 @@ export default function Login() {
               <input
                 className="w-[110%] rounded-sm h-[1.4rem] placeholder:text-[0.9rem] placeholder:md:text-[1rem] md:h-[2.5rem]  text-[#333] p-2 md:p-4 bg-[#eee]"
                 placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 type="text"
                 required
               />
               <input
                 className="w-[110%] rounded-sm h-[1.4rem] placeholder:text-[0.9rem] placeholder:md:text-[1rem] md:h-[2.5rem]  text-[#333] p-2 md:p-4 bg-[#eee]"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 required
               />
@@ -202,13 +295,20 @@ export default function Login() {
               <input
                 className="w-[110%] rounded-sm h-[1.4rem] placeholder:text-[0.9rem] placeholder:md:text-[1rem] md:h-[2.5rem]  text-[#333] p-2 md:p-4 bg-[#eee]"
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 required
               />
             </div>
 
             <div className="flex flex-col items-center justify-center gap-4 mt-4">
-              <button className="md:p-2 p-1 text-white text-[0.8rem] md:text-[1rem] bg-red-500 rounded-full w-[80%] md:w-[50%] md:mt-5 font-semibold">
+              <button
+                onClick={(e) => {
+                  SignUp(e);
+                }}
+                className="md:p-2 p-1 text-white text-[0.8rem] md:text-[1rem] bg-red-500 rounded-full w-[80%] md:w-[50%] md:mt-5 font-semibold"
+              >
                 SIGN UP
               </button>
             </div>

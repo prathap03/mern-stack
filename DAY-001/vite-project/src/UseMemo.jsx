@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UseMemo() {
   const [square, setSquare] = useState("");
@@ -13,7 +14,7 @@ export default function UseMemo() {
     setUrl("https://media.tenor.com/bIrHe_MGkQAAAAAM/gpmuthu-sethapayale.gif")
     setSquare(num * num);
     setTimeout(()=>{setUrl("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXR3YnYybXE2bG9lOTdtdGsyenNrczZzOXV1N2poZm5nbDFwcWZ3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VDYPFVyLNfteiCkqgw/giphy.gif")},3000)
-  });
+  },[square]);
 
   let squareText;
   if (square == "") {
@@ -23,6 +24,13 @@ export default function UseMemo() {
   } else {
     squareText = "Invalid Value";
   }
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!localStorage.getItem("token")){
+      navigate("/login")
+    }
+  }, []);
 
   return (
     <div

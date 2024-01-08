@@ -9,6 +9,7 @@ export default function UseReducer() {
   const reset = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3",{volume:0.001});
   const add = new Audio("https://audio-previews.elements.envatousercontent.com/files/380699735/preview.mp3?response-content-disposition=attachment%3B+filename%3D%22CA3S2TC-puzzle-add.mp3%22",{volume:0.001});
   const sub = new Audio("https://audio-previews.elements.envatousercontent.com/files/101795909/preview.mp3?response-content-disposition=attachment%3B+filename%3D%22QXTVGUM-life-points-decrease.mp3%22",{volume:0.001});
+  
   const reducer = (state, action) => {
     switch (action.type) {
       case "increment":
