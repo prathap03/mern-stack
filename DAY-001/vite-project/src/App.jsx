@@ -38,7 +38,7 @@ function App({socket}) {
 
   return (
     <div className="flex flex-col min-h-screen ">
-    <BrowserRouter>
+    <BrowserRouter basename="/">
     <NavBar  props={{user:user,setUser:setUser}}/>
       <Routes>
         <Route path="/" element={<Home/>} />
