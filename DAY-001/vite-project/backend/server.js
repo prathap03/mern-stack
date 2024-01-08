@@ -178,11 +178,4 @@ server.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
 
-app.use('/some-route', require(path.join(__dirname, 'api', 'routes', 'route.js')));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, './', 'dist')));
-  app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, './', 'dist', 'index.html'));
-  })
-}
