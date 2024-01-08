@@ -41,7 +41,7 @@ function Orders({socket}) {
 
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/getOrders");
+        const response = await axios.get("https://mern-stack-backend-2zxg.onrender.com/api/getOrders");
         if (response.data) {
           console.log(response.data);
           setOrders(response.data);
@@ -65,7 +65,7 @@ function Orders({socket}) {
 
   const addOrder = async()=>{
     try{
-      const {data} = axios.post("http://localhost:5000/api/addOrder",{
+      const {data} = axios.post("https://mern-stack-backend-2zxg.onrender.com/api/addOrder",{
         status:"cooking"
       })
   
@@ -79,7 +79,7 @@ function Orders({socket}) {
 
   const prepareOrder = async(id)=>{
     try{
-      const {data} = await axios.post("http://localhost:5000/api/prepareOrder",{
+      const {data} = await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/prepareOrder",{
         _id:id
       })
       if(data){
@@ -92,7 +92,7 @@ function Orders({socket}) {
 
   const deliverOrder = async(id)=>{
     try{
-      const {data} = await axios.post("http://localhost:5000/api/deliverOrder",{
+      const {data} = await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/deliverOrder",{
         _id:id
       })
       if(data){
@@ -107,12 +107,12 @@ function Orders({socket}) {
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 md:justify-center min-w-screen">
       <h1>Orders</h1>
-      <div className="flex bg-gradient-to-tr flex-wrap from-blue-500 to-blue-200 p-4 shadow-md rounded-md w-[90%] gap-2 ">
+      <div className="flex bg-gradient-to-tr flex-wrap from-blue-500  md:min-h-[12rem]  to-blue-200 p-4 shadow-md rounded-md w-[90%] gap-2 ">
        {isLoading?(
-        <div className="flex items-center justify-center p-1 bg-violet-400   rounded-[100%]">
-            <dir  className="bg-white rounded-[100%] min-h-[100%] flex flex-grow shadow-md">
-                
-            </dir>
+        <div className="flex items-center justify-center p-1 flex-grow  rounded-[100%]">
+            <div>
+              <h1>Loading...</h1>
+            </div>
         </div>
        ):  orders.map((order,idx) => {
         return (
@@ -140,7 +140,7 @@ function Orders({socket}) {
       </div>
 
       <h1>Orders - Ready</h1>
-      <div className="flex bg-gradient-to-tr flex-wrap from-green-500 to-blue-200 p-4 shadow-md rounded-md w-[90%] gap-2 ">
+      <div className="flex bg-gradient-to-tr flex-wrap from-green-500 to-blue-200 p-4 md:min-h-[12rem] shadow-md rounded-md w-[90%] gap-2 ">
         {orders.map((order,idx) => {
           return (
             order.status == "ready" && (
@@ -166,7 +166,7 @@ function Orders({socket}) {
       </div>
 
       <button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>
-        <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col  rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
+        <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
           {orders.map((order)=>{
             return(
               <div key={order._id} className="flex items-center gap-4 p-2 bg-white/[40%] rounded-md shadow-md backdrop-blur-md">
