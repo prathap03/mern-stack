@@ -84,6 +84,18 @@ app.get("/api/getOrders",async(req,res)=>{
   }
 })
 
+app.post("/api/addOrder",async (req,res)=>{
+  console.log(req.body)
+  try{
+    const order = await Order.create({
+      status:req.body.status,
+    })
+    res.status(200).json({status:"ok"})
+  }catch(err){
+    console.log(err)
+  }
+})
+
 app.post("/api/register", async (req, res) => {
   console.log(req.body);
   try {
@@ -134,6 +146,29 @@ app.post("/api/login", async (req, res) => {
     res.status(500).json({ status: "error", msg: err });
   }
 });
+
+app.post("/api/prepareOrder",async(req,res)=>{
+  console.log(req.body);
+  try{
+    const updatedOrder = await Order.updateOne({_id:req.body._id},{status:"ready"})
+    res.status(200).json({updatedOrder})
+  }catch(err){
+    console.log(err)
+    res.status(201).json(err)
+  }
+})
+
+
+app.post("/api/deliverOrder",async(req,res)=>{
+  console.log(req.body);
+  try{
+    const deliveredOrder = await Order.deleteOne({_id:req.body._id})
+    res.status(200).json({deliveredOrder})
+  }catch(err){
+    console.log(err)
+    res.status(201).json(err)
+  }
+})
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

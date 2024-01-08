@@ -63,6 +63,47 @@ function Orders({socket}) {
     };
   }, [socket]);
 
+  const addOrder = async()=>{
+    try{
+      const {data} = axios.post("http://localhost:5000/api/addOrder",{
+        status:"cooking"
+      })
+  
+      if(!data){
+        console.log("ERROR")
+      }
+    } catch(err){
+      console.log(err)}
+  
+  }
+
+  const prepareOrder = async(id)=>{
+    try{
+      const {data} = await axios.post("http://localhost:5000/api/prepareOrder",{
+        _id:id
+      })
+      if(data){
+        console.log(data)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const deliverOrder = async(id)=>{
+    try{
+      const {data} = await axios.post("http://localhost:5000/api/deliverOrder",{
+        _id:id
+      })
+      if(data){
+        console.log(data)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 md:justify-center min-w-screen">
       <h1>Orders</h1>
@@ -123,6 +164,22 @@ function Orders({socket}) {
           );
         })}
       </div>
+
+      <button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>
+        <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col  rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
+          {orders.map((order)=>{
+            return(
+              <div key={order._id} className="flex items-center gap-4 p-2 bg-white/[40%] rounded-md shadow-md backdrop-blur-md">
+                <h1>${order._id}</h1>
+                <div className="flex justify-end flex-grow gap-2 ">
+                <button onClick={()=>{prepareOrder(order._id)}} disabled={order.status=="ready"?true:false} className="p-2 font-semibold text-white bg-green-500 rounded-full shadow-md disabled:bg-green-300">Ready</button>
+                <button onClick={()=>{deliverOrder(order._id)}} className="p-2 font-semibold text-white bg-red-500 rounded-full shadow-md">Delete</button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+    
     </div>
   );
 }
