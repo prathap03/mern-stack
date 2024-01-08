@@ -1,0 +1,11 @@
+{
+    "rewrites":  [
+      {"source": "/(.*)", "destination": "/backend/server.js"}
+    ],
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ]
+  }
