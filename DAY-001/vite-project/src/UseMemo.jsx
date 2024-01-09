@@ -6,9 +6,9 @@ export default function UseMemo() {
   const [input, setInput] = useState("");
   const [url,setUrl] = useState("https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXR3YnYybXE2bG9lOTdtdGsyenNrczZzOXV1N2poZm5nbDFwcWZ3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VDYPFVyLNfteiCkqgw/giphy.gif")
   const muthu = new Audio(
-    "https://us-tuna-sounds-files.voicemod.net/2a3cf9a4-f789-42dc-a644-8d88c0a45d78-1660032742044.mp3",
-    { volume: "1.0" }
+    "https://us-tuna-sounds-files.voicemod.net/2a3cf9a4-f789-42dc-a644-8d88c0a45d78-1660032742044.mp3"
   );
+  muthu.volume = 0.5;
   const squareNum = useMemo(() => async (num) => {
     muthu.play();
     setUrl("https://media.tenor.com/bIrHe_MGkQAAAAAM/gpmuthu-sethapayale.gif")

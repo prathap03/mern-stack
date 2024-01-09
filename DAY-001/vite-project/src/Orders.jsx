@@ -6,8 +6,8 @@ function Orders({socket}) {
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
-  const add = new Audio("https://cdn.freesound.org/previews/318/318826_2700262-lq.mp3");
-  add.volume = 0.4;
+  const add = new Audio("https://cdn.pixabay.com/audio/2022/04/05/audio_c5c228d922.mp3");
+  add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
 
