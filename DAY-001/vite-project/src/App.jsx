@@ -47,7 +47,7 @@ function App({socket}) {
         <Route path="/login" element={<Login/>} />
         <Route path="/useReducer" element={<UseReducer/>} />
         <Route path="/useMemo" element={<UseMemo/>} />
-        <Route path="orders" element={<Orders socket={socket}/>}/>
+        <Route path="orders" element={<Orders user={user} socket={socket}/>}/>
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
       

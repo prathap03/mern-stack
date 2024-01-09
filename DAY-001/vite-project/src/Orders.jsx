@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 
-function Orders({socket}) {
+function Orders({socket,user}) {
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
@@ -11,7 +11,7 @@ function Orders({socket}) {
   add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
-    
+    console.log(user)
     socket.on("online", (online) => {
       console.log(online)
       setOnline(online)
@@ -168,15 +168,18 @@ function Orders({socket}) {
     <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
       <div className="flex flex-col gap-2 md:w-[90%] m-2 justify-center items-center min-h-[5rem] ">
       <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {online.length}</h1>
-      <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
-        {online.map((user)=>{{return(
-          <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
-            <h1 className="md:text-[1.2rem] text-[0.8rem]">{user}</h1>
-            <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
-          </div>
-        )}})}
-         <button onClick={()=>{alertAll()}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Alert All</button>
-      </div>
+      {user && user.email=="joeprathappj@gmail.com" && (
+           <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
+           {online.map((user)=>{{return(
+             <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
+               <h1 className="md:text-[1.2rem] text-[0.8rem]">{user}</h1>
+               <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
+             </div>
+           )}})}
+            <button onClick={()=>{alertAll()}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Alert All</button>
+         </div>
+      )}
+   
       </div>
       {ready.status && (
            <div className="bg-green-200 w-[90%] p-2 m-2 animate-pulse rounded-md outline outline-2 outline-green-500">
@@ -259,20 +262,25 @@ function Orders({socket}) {
       </div>
 
       <button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>
-        <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
+        {user ?(
+             <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
           
-          {orders.map((order)=>{
-            return(
-              <div key={order._id} className="flex items-center gap-4 p-2 bg-white/[40%] rounded-md shadow-md backdrop-blur-md">
-                <h1>${order._id}</h1>
-                <div className="flex justify-end flex-grow gap-2 ">
-                <button onClick={()=>{prepareOrder(order._id)}} disabled={order.status=="ready"?true:false} className="p-2 active:scale-90 disabled:active:scale-100 transition-all md:text-[1rem] text-[0.8rem] font-semibold text-white bg-green-500 rounded-full shadow-md disabled:bg-green-300">Ready</button>
-                <button onClick={()=>{deliverOrder(order._id)}} className="p-2 font-semibold text-white bg-red-500 md:text-[1rem] transition-all disabled:active:scale-100 active:scale-90 text-[0.8rem] rounded-full shadow-md">Delete</button>
-                </div>
-              </div>
-            )
-          })}
-        </div>
+             {orders.map((order)=>{
+               return(
+                 <div key={order._id} className="flex items-center gap-4 p-2 bg-white/[40%] rounded-md shadow-md backdrop-blur-md">
+                   <h1>${order._id}</h1>
+                   <div className="flex justify-end flex-grow gap-2 ">
+                   <button onClick={()=>{prepareOrder(order._id)}} disabled={order.status=="ready"?true:false} className="p-2 active:scale-90 disabled:active:scale-100 transition-all md:text-[1rem] text-[0.8rem] font-semibold text-white bg-green-500 rounded-full shadow-md disabled:bg-green-300">Ready</button>
+                   <button onClick={()=>{deliverOrder(order._id)}} className="p-2 font-semibold text-white bg-red-500 md:text-[1rem] transition-all disabled:active:scale-100 active:scale-90 text-[0.8rem] rounded-full shadow-md">Delete</button>
+                   </div>
+                 </div>
+               )
+             })}
+           </div>
+        ):(
+          <div className="flex flex-col items-center justify-center flex-grow">
+          <h1 className="text-2xl font-semibold animate-pulse">Login to see orders</h1></div>)}
+     
     
     </div>
   );
