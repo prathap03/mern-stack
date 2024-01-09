@@ -27,6 +27,17 @@ function Orders({socket}) {
       setLoading(false)
      
     });
+
+    socket.on("orderNotification",async(readyOrder)=>{
+      Notification.requestPermission().then((permission)=>{
+        if(permission === "granted"){
+          const notification = new Notification("Order is ready",{
+            body:`Order ${readyOrder._id} is ready`
+          })
+        }
+      })
+    })
+
     socket.on("deliverOrder", async(id) => {
       setLoading(true)
       const updatedOrder = orders.filter((order) => {

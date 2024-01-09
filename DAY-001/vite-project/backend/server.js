@@ -60,13 +60,14 @@ connection.once("open",()=>{
           id: change.fullDocument._id,
           status: change.fullDocument.status,
         }
-        io.of("/api/socket").emit("newOrder",order)
+        io.to(change.fullDocument.client_id).emit("orderNotification",order)
+        io.of("/api/socket").emit("readyOrder",order)
         break;
       case "delete":
           order = {
             id: change.documentKey._id,
           }
-          io.of("/api/socket").emit("newOrder",change.documentKey._id)
+          io.of("/api/socket").emit("deliverOrder",change.documentKey._id)
         break;
       default:
         console.log("")
@@ -89,8 +90,9 @@ app.post("/api/addOrder",async (req,res)=>{
   try{
     const order = await Order.create({
       status:req.body.status,
+      client_id:req.body.client_id,
     })
-    res.status(200).json({status:"ok"})
+    res.status(200).json({status:"ok",order})
   }catch(err){
     console.log(err)
   }
