@@ -34,7 +34,14 @@ io.of("/api/socket").on("connection",(socket)=>{
 
   socket.on("disconnect",()=>{
     console.log("socket.io: User disconnected: ",socket.id)
-    users = users.filter((user)=>user!==socket.id)
+  
+    users = Object.keys(users).reduce((object, key) => {
+      if (key !== socket.id) {
+        object[key] = users[key];
+      }
+      return object;
+    }, {});
+    delete users[socket.id]
     io.of("/api/socket").emit("online",users)  
   })
 }
@@ -97,6 +104,7 @@ app.post("/api/socketId",async(req,res)=>{
 app.post("/api/alertAll",async(req,res)=>{
   try{
     if(req.body.id){
+      console.log(req.body.id)
       io.of("/api/socket").to(req.body.id).emit("alertAll")
       res.status(200).json({status:"ok"})
       return

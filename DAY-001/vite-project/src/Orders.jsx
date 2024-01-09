@@ -141,6 +141,7 @@ function Orders({socket,user}) {
 
   const alertUser = async(user)=>{
     try{
+      console.log(user) 
       const {data} = await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/alertAll",{
         id:user
       })
@@ -167,19 +168,21 @@ function Orders({socket,user}) {
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
       <div className="flex flex-col gap-2 md:w-[90%] m-2 justify-center items-center min-h-[5rem] ">
-      <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {online.length}</h1>
+      <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {Object.keys(online).length}</h1>
       {user && user.email=="joeprathappj@gmail.com" && (
            <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
-           {online.map((user)=>{{return(
+           {Object.keys(online).map((user)=>{
+            console.log(online[user],user)
+            return(
              <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
-               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{user}
+               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="" ? online[user].name : user }
                <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500">
               
                </div>
                </h1>
                <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
              </div>
-           )}})}
+           )})}
             <button onClick={()=>{alertAll()}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Alert All</button>
          </div>
       )}
