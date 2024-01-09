@@ -7,14 +7,15 @@ function Orders({socket}) {
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
   const add = new Audio("https://cdn.pixabay.com/audio/2022/04/05/audio_c5c228d922.mp3");
+  const [online,setOnline] = useState(0)
   add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
-
     
-    
-    
-   
+    socket.on("online", (online) => {
+      setOnline(online.length)
+      }
+    )
   
     socket.on("newOrder", async(order) => {
       setLoading(true)
@@ -83,6 +84,7 @@ function Orders({socket}) {
       socket.off("readyOrder", (id)=>{});
       socket.off("deliverOrder", (id)=>{})
       socket.off("orderNotification",(readyOrder)=>{})
+      socket.off("online",(online)=>{})
   
     };
   }, [socket]);
@@ -132,6 +134,9 @@ function Orders({socket}) {
 
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
+      <div className="flex w-[90%] m-2 justify-center items-center min-h-[5rem] ">
+      <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {online}</h1>
+      </div>
       {ready.status && (
            <div className="bg-green-200 w-[90%] p-2 m-2 animate-pulse rounded-md outline outline-2 outline-green-500">
            <h1 className="md:text-[1.3rem] text-[0.8rem] font-semibold text-green-700">Order id: {ready.id} ready</h1>
