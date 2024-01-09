@@ -5,9 +5,15 @@ import { io } from "socket.io-client";
 function Orders({socket}) {
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
+  const [ready,setReady] = useState({status:false,id:""})
   useEffect(() => {
     setLoading(true)
+
+    
+    
+    
    
+  
     socket.on("newOrder", async(order) => {
       setLoading(true)
       if(!orders.includes(order)){
@@ -29,13 +35,16 @@ function Orders({socket}) {
     });
 
     socket.on("orderNotification",async(readyOrder)=>{
+      console.log(readyOrder)
       Notification.requestPermission().then((permission)=>{
         if(permission === "granted"){
           const notification = new Notification("Order is ready",{
-            body:`Order ${readyOrder._id} is ready`
+            body:`Order ${readyOrder.id} is ready`
           })
         }
       })
+      setReady({status:true,id:readyOrder.id})
+      setTimeout(()=>{setReady({status:false,id:""})},5000)
     })
 
     socket.on("deliverOrder", async(id) => {
@@ -70,6 +79,7 @@ function Orders({socket}) {
       socket.off("newOrder",(readyOrder)=>{});
       socket.off("readyOrder", (id)=>{});
       socket.off("deliverOrder", (id)=>{})
+      socket.off("orderNotification",(readyOrder)=>{})
   
     };
   }, [socket]);
@@ -84,6 +94,7 @@ function Orders({socket}) {
       if(!data){
         console.log("ERROR")
       }
+
     } catch(err){
       console.log(err)}
   
@@ -117,7 +128,13 @@ function Orders({socket}) {
 
 
   return (
-    <div className="flex flex-col items-center flex-grow bg-gray-200 md:justify-center min-w-screen">
+    <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
+      {ready.status && (
+           <div className="bg-green-200 w-[90%] p-2 m-2 rounded-md outline outline-2 outline-green-500">
+           <h1 className="text-[1.3rem] font-semibold text-green-700">Order id: {ready.id} ready</h1>
+         </div>
+      )}
+   
       <h1>Orders</h1>
       <div className="flex bg-gradient-to-tr flex-wrap from-blue-500  md:min-h-[12rem]  to-blue-200 p-4 shadow-md rounded-md w-[90%] gap-2 ">
        {isLoading?(

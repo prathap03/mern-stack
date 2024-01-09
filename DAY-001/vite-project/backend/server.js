@@ -60,7 +60,7 @@ connection.once("open",()=>{
           id: change.fullDocument._id,
           status: change.fullDocument.status,
         }
-        io.to(change.fullDocument.client_id).emit("orderNotification",order)
+        io.of("/api/socket").to(change.fullDocument.client_id).emit("orderNotification",order)
         io.of("/api/socket").emit("readyOrder",order)
         break;
       case "delete":
