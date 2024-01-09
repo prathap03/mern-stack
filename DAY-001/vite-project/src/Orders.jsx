@@ -44,7 +44,7 @@ function Orders({socket}) {
         }
       })
       setReady({status:true,id:readyOrder.id})
-      setTimeout(()=>{setReady({status:false,id:""})},5000)
+      setTimeout(()=>{setReady({status:false,id:""})},10000)
     })
 
     socket.on("deliverOrder", async(id) => {
@@ -130,8 +130,8 @@ function Orders({socket}) {
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
       {ready.status && (
-           <div className="bg-green-200 w-[90%] p-2 m-2 rounded-md outline outline-2 outline-green-500">
-           <h1 className="text-[1.3rem] font-semibold text-green-700">Order id: {ready.id} ready</h1>
+           <div className="bg-green-200 w-[90%] p-2 m-2 animate-pulse rounded-md outline outline-2 outline-green-500">
+           <h1 className="md:text-[1.3rem] text-[0.8rem] font-semibold text-green-700">Order id: {ready.id} ready</h1>
          </div>
       )}
    
