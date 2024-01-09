@@ -77,7 +77,8 @@ function Orders({socket}) {
   const addOrder = async()=>{
     try{
       const {data} = axios.post("https://mern-stack-backend-2zxg.onrender.com/api/addOrder",{
-        status:"cooking"
+        status:"cooking",
+        client_id: socket.id
       })
   
       if(!data){
