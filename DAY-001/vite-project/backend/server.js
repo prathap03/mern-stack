@@ -8,9 +8,6 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 
-
-
-
 app.use(
   cors({
     origin: "*",
@@ -40,7 +37,10 @@ io.of("/api/socket").on("connection",(socket)=>{
     users = users.filter((user)=>user!==socket.id)
     io.of("/api/socket").emit("online",users)  
   })
-})
+}
+)
+
+
 
 mongoose.connect("mongodb+srv://joeprathap123:joeprathap123@cluster0.qgfc2.mongodb.net/mern-stack");
 
@@ -80,6 +80,21 @@ connection.once("open",()=>{
         console.log("")
     }
   })
+})
+
+app.post("/api/alertAll",async(req,res)=>{
+  try{
+    if(req.body.id){
+      io.of("/api/socket").to(req.body.id).emit("alertAll")
+      res.status(200).json({status:"ok"})
+      return
+    }
+    io.of("/api/socket").emit("alertAll")
+    res.status(200).json({status:"ok"})
+  }catch(err){
+    console.log(err)
+    res.status(201).json({status:err})
+  }
 })
 
 app.get("/api/getOrders",async(req,res)=>{

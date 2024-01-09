@@ -1,20 +1,20 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+
 
 function Orders({socket}) {
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
   const add = new Audio("https://cdn.pixabay.com/audio/2022/04/05/audio_c5c228d922.mp3");
-  const [online,setOnline] = useState(0)
+  const [online,setOnline] = useState([])
   add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
     
     socket.on("online", (online) => {
       console.log(online)
-      setOnline(online.length)
+      setOnline(online)
       }
     )
   
@@ -64,13 +64,19 @@ function Orders({socket}) {
     
     });
 
+    socket.on("alertAll",async()=>{
+      setReady({status:true,id:"All"})
+      setTimeout(()=>{setReady({status:false,id:""})},5000)
+      await add.play()
+    })
+
     const fetchOrders = async () => {
       try {
         const response = await axios.get("https://mern-stack-backend-2zxg.onrender.com/api/getOrders");
         if (response.data) {
           console.log(response.data.data);
           setOrders(response.data.data);
-          setOnline(response.data.users.length)
+          setOnline(response.data.users)
         }
       } catch (err) {
         console.log(err);
@@ -133,11 +139,44 @@ function Orders({socket}) {
     }
   }
 
+  const alertUser = async(user)=>{
+    try{
+      const {data} = await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/alertAll",{
+        id:user
+      })
+      if(data){
+        console.log(data)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  const alertAll = async()=>{
+    try{
+      const {data} = await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/alertAll")
+      if(data){
+        console.log(data)
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 
   return (
     <div className="flex flex-col items-center flex-grow bg-gray-200 min-w-screen">
-      <div className="flex w-[90%] m-2 justify-center items-center min-h-[5rem] ">
-      <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {online}</h1>
+      <div className="flex flex-col gap-2 md:w-[90%] m-2 justify-center items-center min-h-[5rem] ">
+      <h1 className="md:text-[1.2rem] text-[0.8rem]">Currently Online: {online.length}</h1>
+      <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
+        {online.map((user)=>{{return(
+          <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
+            <h1 className="md:text-[1.2rem] text-[0.8rem]">{user}</h1>
+            <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
+          </div>
+        )}})}
+         <button onClick={()=>{alertAll()}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Alert All</button>
+      </div>
       </div>
       {ready.status && (
            <div className="bg-green-200 w-[90%] p-2 m-2 animate-pulse rounded-md outline outline-2 outline-green-500">
