@@ -8,6 +8,14 @@ function Orders({socket,user}) {
   const [ready,setReady] = useState({status:false,id:""})
   const add = new Audio("https://cdn.pixabay.com/audio/2022/04/05/audio_c5c228d922.mp3");
   const [online,setOnline] = useState([])
+  const [chats,setChats] = useState([{
+    id:"1234",
+    message:"Hello"
+  },{
+    id:"123",
+    message:"Hi"
+  }])
+  const [newChat,setNewChat] = useState("")
   add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
@@ -64,11 +72,23 @@ function Orders({socket,user}) {
     
     });
 
+    socket.on("newChat",(chat)=>{
+      console.log(chat)
+      setChats([...chats,chat])
+    })
+
     socket.on("alertAll",async()=>{
       setReady({status:true,id:"All"})
       setTimeout(()=>{setReady({status:false,id:""})},5000)
       await add.play()
     })
+
+    const newChat = async()=>{
+      await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/newChat",{
+        id:socket.id,
+        message:newChat
+      })
+    }
 
     const fetchOrders = async () => {
       try {
@@ -93,6 +113,7 @@ function Orders({socket,user}) {
       socket.off("deliverOrder", (id)=>{})
       socket.off("orderNotification",(readyOrder)=>{})
       socket.off("online",(online)=>{})
+      socket.off("newChat",(chat)=>{})
   
     };
   }, [socket]);
@@ -283,6 +304,30 @@ function Orders({socket,user}) {
                  </div>
                )
              })}
+             <div className="flex flex-col gap-2 mt-5">
+              <h1 className="text-[1.6rem]  font semibold">Chatrooom</h1>
+            <div className="flex flex-col flex-grow overflow-scroll ">
+              <div className="w-full bg-white/[60%] flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
+                {chats && chats.map((chat) => {
+                  return (
+                    chat?.id === socket?.id ? (
+                      <div className="flex justify-end w-ful" key={chat.id}>
+                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-full bg-blue-400">{chat.message}</h1>
+                      </div>
+                    ) : (
+                      <div className="flex w-full" key={chat.id}>
+                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-wrap rounded-full text-white p-2 bg-green-500">{chat.message}</h1>
+                      </div>
+                    )
+                  );
+                })}
+              </div>
+              <div className="flex pt-2">
+                <input type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
+                <button className="p-2 text-white bg-green-500">SEND</button>
+              </div>
+            </div>
+             </div>
            </div>
         ):(
           <div className="flex flex-col items-center justify-center flex-grow">

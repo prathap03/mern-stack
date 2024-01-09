@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Order = require("./models/order.model")
 const jwt = require("jsonwebtoken");
-const { jwtDecode } = require("jwt-decode");
 
 const app = express();
 
@@ -29,9 +28,9 @@ let users = {};
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
-  console.log(socket.handshake.query.token)
-  let user = jwtDecode(socket.handshake.query.token)
-  users[socket.id] = user.name;
+  // console.log(socket.handshake.query.token)
+  // let user = jwtDecode(socket.handshake.query.token)
+  users[socket.id] = "";
   io.of("/api/socket").emit("online",users)
 
 
@@ -49,6 +48,8 @@ io.of("/api/socket").on("connection",(socket)=>{
   })
 }
 )
+
+
 
 
 
@@ -106,6 +107,23 @@ app.post("/api/socketId",async(req,res)=>{
     console.log(err)
     res.status(201).json({status:err})
   } 
+})
+
+app.post("/api/chat",async(req,res)=>{
+  console.log(req.body)
+  try{
+    if(req.body.id){
+      console.log(req.body.id)
+      io.of("/api/socket").to(req.body.id).emit("chat",req.body)
+      res.status(200).json({status:"ok"})
+      return
+    }
+    io.of("/api/socket").emit("chat",req.body)
+    res.status(200).json({status:"ok"})
+  }catch(err){
+    console.log(err)
+    res.status(201).json({status:err})
+  }
 })
 
 app.post("/api/alertAll",async(req,res)=>{
