@@ -27,7 +27,7 @@ const io = require("socket.io")(server,{
   }
 });
 
-let users;
+let users = [];
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
@@ -37,6 +37,8 @@ io.of("/api/socket").on("connection",(socket)=>{
 
   socket.on("disconnect",()=>{
     console.log("socket.io: User disconnected: ",socket.id)
+    users = users.filter((user)=>user!==socket.id)
+    io.of("/api/socket").emit("online",users)  
   })
 })
 
@@ -83,7 +85,7 @@ connection.once("open",()=>{
 app.get("/api/getOrders",async(req,res)=>{
   try{
     const data = await Order.find();
-    res.status(200).json(data)
+    res.status(200).json({status:"ok",data:data,users:users})
   }catch(err){
     console.error(err)
     res.status(500).json({status:err})

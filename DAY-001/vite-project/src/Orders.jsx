@@ -13,6 +13,7 @@ function Orders({socket}) {
     setLoading(true)
     
     socket.on("online", (online) => {
+      console.log(online)
       setOnline(online.length)
       }
     )
@@ -67,8 +68,9 @@ function Orders({socket}) {
       try {
         const response = await axios.get("https://mern-stack-backend-2zxg.onrender.com/api/getOrders");
         if (response.data) {
-          console.log(response.data);
-          setOrders(response.data);
+          console.log(response.data.data);
+          setOrders(response.data.data);
+          setOnline(response.data.users.length)
         }
       } catch (err) {
         console.log(err);
