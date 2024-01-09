@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { io } from 'socket.io-client';
 
-const socket = io("https://mern-stack-backend-2zxg.onrender.com/api/socket");
+const socket = io("https://mern-stack-backend-2zxg.onrender.com/api/socket",{query:{token:localStorage.getItem("token")}});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

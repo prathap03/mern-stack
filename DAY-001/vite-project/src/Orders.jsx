@@ -172,13 +172,13 @@ function Orders({socket,user}) {
       {user && user.email=="joeprathappj@gmail.com" && (
            <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
            {Object.keys(online).map((user)=>{
-            console.log(online[user],user)
+            console.log(online)
+            console.log(user)
+            console.log(online[user])
             return(
              <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
-               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="" ? online[user].name : user }
-               <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500">
-              
-               </div>
+               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="" ? online[user] : user }
+               <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500"/>
                </h1>
                <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
              </div>

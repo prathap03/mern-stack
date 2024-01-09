@@ -38,9 +38,10 @@ export default function Login({socket}) {
       if (status == "ok") {
         localStorage.setItem("token", user);
         console.log(user);
+        console.log(socket.id)
         await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/socketId",{
           email: email,
-          socketId: socket.id,
+          id: socket.id,
         })
         navigate("/");
         document.location.reload();

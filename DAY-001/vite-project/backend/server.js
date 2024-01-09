@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Order = require("./models/order.model")
 const jwt = require("jsonwebtoken");
+const { jwtDecode } = require("jwt-decode");
 
 const app = express();
 
@@ -28,7 +29,9 @@ let users = {};
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
-  users[socket.id] = "";
+  console.log(socket.handshake.query.token)
+  let user = jwtDecode(socket.handshake.query.token)
+  users[socket.id] = user.name;
   io.of("/api/socket").emit("online",users)
 
 
@@ -90,10 +93,14 @@ connection.once("open",()=>{
 })
 
 app.post("/api/socketId",async(req,res)=>{
+  console.log(req.body)
   try{
-    const name = await User.findOne({email:req.body.email})
-    users[req.body.id] = name;
+    console.log(users)
+    const user = await User.findOne({email:req.body.email})
+    console.log(req.body.id,user.name )
+    users[req.body.id] = user.name;
     io.of("/api/socket").emit("online",users)
+    console.log(users)
     res.status(200).json({status:"ok"})
   }catch(err){
     console.log(err)
