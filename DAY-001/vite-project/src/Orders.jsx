@@ -172,7 +172,11 @@ function Orders({socket,user}) {
            <div className="flex flex-col items-center justify-center w-[100%] md:w-[60%] gap-2">
            {online.map((user)=>{{return(
              <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
-               <h1 className="md:text-[1.2rem] text-[0.8rem]">{user}</h1>
+               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{user}
+               <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500">
+              
+               </div>
+               </h1>
                <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
              </div>
            )}})}
@@ -261,7 +265,7 @@ function Orders({socket,user}) {
         })}
       </div>
 
-      <button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>
+      {user && (<button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>)}
         {user ?(
              <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
           
@@ -279,7 +283,7 @@ function Orders({socket,user}) {
            </div>
         ):(
           <div className="flex flex-col items-center justify-center flex-grow">
-          <h1 className="text-2xl font-semibold animate-pulse">Login to see orders</h1></div>)}
+          <h1 className="text-lg font-semibold md:text-2xl animate-pulse">Login to see and place orders</h1></div>)}
      
     
     </div>

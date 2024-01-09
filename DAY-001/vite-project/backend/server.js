@@ -24,11 +24,11 @@ const io = require("socket.io")(server,{
   }
 });
 
-let users = [];
+let users = {};
 
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
-  users.push(socket.id)
+  users[socket.id] = "";
   io.of("/api/socket").emit("online",users)
 
 
@@ -80,6 +80,18 @@ connection.once("open",()=>{
         console.log("")
     }
   })
+})
+
+app.post("/api/socketId",async(req,res)=>{
+  try{
+    const name = await User.findOne({email:req.body.email})
+    users[req.body.id] = name;
+    io.of("/api/socket").emit("online",users)
+    res.status(200).json({status:"ok"})
+  }catch(err){
+    console.log(err)
+    res.status(201).json({status:err})
+  } 
 })
 
 app.post("/api/alertAll",async(req,res)=>{

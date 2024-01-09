@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Login() {
+export default function Login({socket}) {
   const [switchLayout, setSwitchLayout] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,6 +38,10 @@ export default function Login() {
       if (status == "ok") {
         localStorage.setItem("token", user);
         console.log(user);
+        await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/socket",{
+          email: email,
+          socketId: socket.id,
+        })
         navigate("/");
         document.location.reload();
       } else {
@@ -68,6 +73,7 @@ export default function Login() {
       const { status, msg } = await res.json();
       console.log(status, msg);
       if (status == "ok") {
+     
         navigate("/");
       } else {
         alert("Error" + JSON.stringify(msg));

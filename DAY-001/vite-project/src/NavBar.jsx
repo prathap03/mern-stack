@@ -7,7 +7,7 @@ export default function NavBar({props: { user, setUser }}) {
   const Logout = ()=>{
     localStorage.removeItem("token")
     setUser("")
-    navigate("/login")
+    
   }
   return (
     <div>
