@@ -6,6 +6,8 @@ function Orders({socket}) {
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
+  const add = new Audio("https://cdn.freesound.org/previews/318/318826_2700262-lq.mp3");
+  add.volume = 0.4;
   useEffect(() => {
     setLoading(true)
 
@@ -43,8 +45,9 @@ function Orders({socket}) {
           })
         }
       })
+      await add.play()  
       setReady({status:true,id:readyOrder.id})
-      setTimeout(()=>{setReady({status:false,id:""})},10000)
+      setTimeout(()=>{setReady({status:false,id:""})},18000)
     })
 
     socket.on("deliverOrder", async(id) => {
