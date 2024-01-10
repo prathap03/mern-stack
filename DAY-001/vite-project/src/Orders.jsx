@@ -330,7 +330,12 @@ function Orders({socket,user}) {
           <h1 className="text-lg font-semibold md:text-2xl animate-pulse">Login to see and place orders</h1></div>)
   }
            <div className="flex flex-col gap-2 mt-5">
-              <h1 className="text-[1.6rem]  font semibold">Chatrooom</h1>
+              <div className="text-[1.6rem] relative w-max   font semibold">
+               <div className=" animate-pulse absolute top-2 -right-2  min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] w-[0.6rem] h-[0.6rem] rounded-[100%] bg-green-500"/>
+                <h1>
+                Live Chatrooom
+                  </h1>
+                </div>
             <div id={"chat"} className="flex flex-col flex-grow overflow-scroll ">
               <div className="w-full bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
                 {chats?.map((chat) => {
