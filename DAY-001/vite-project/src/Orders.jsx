@@ -97,7 +97,7 @@ function Orders({socket,user}) {
       if(chat.id != socket.id){
         await message.play()
       }
-      if((chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🌈") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈")) && chat.id != socket.id){
+      if((chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🌈") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈"))){
         await gay.play()
       }
       scrollToBottom()
