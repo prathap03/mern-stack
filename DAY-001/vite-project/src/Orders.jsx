@@ -89,6 +89,7 @@ function Orders({socket,user}) {
 
     socket.on("chat",(chat)=>{
       setChats((prevChats) => [...prevChats, chat]);
+      scrollToBottom()
     })
 
     socket.on("alertAll",async()=>{
@@ -353,7 +354,12 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>
-                        ):( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)}
+                        ): 
+                        chat.message.toLowerCase().split(" ").includes("motor") ? (
+                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                            <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
+                          </div>):
+                        ( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)}
                         
                       </div>
                     ) : (
@@ -373,7 +379,12 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>
-                        ):( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)}
+                        ):
+                        chat.message.toLowerCase().split(" ").includes("motor") ? (
+                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                            <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
+                          </div>):
+                        ( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)}
                         </div>
                         
                       </div>
