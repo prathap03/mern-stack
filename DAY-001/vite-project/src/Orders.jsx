@@ -347,12 +347,20 @@ function Orders({socket,user}) {
                         <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>
                       </div>
                     ) : (
-                      <div className="flex flex-col w-full" key={chat.id}>
+                      <div className="flex flex-col w-full " key={chat.id}>
                         <div className="flex flex-col bg-green-500 rounded-lg shadow-md backdrop-blur-sm w-max">
-                        <div className="bg-gradient-to-tr rounded-t-lg from-white-600 to-violet-200 min-w-[8rem] p-2 max-w-[12rem]">
+                        <div className="bg-gradient-to-tr rounded-t-lg from-white-600 to-violet-200 min-w-[8rem] p-2 ">
                           <h1 className="text-[0.8rem] font-semibold">{online[chat.id] ? online[chat.id] : chat.id}</h1>
+                
                         </div>
                         <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
+                        {console.log(chat.message.split(" "))}
+                        {chat.message.split(" ").includes("codeword") && (
+                          <div className="overflow-hidden bg-red-500 rounded-b-lg">
+
+                            <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
+                          </div>
+                        )}
                         </div>
                         
                       </div>
