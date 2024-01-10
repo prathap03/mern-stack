@@ -487,7 +487,7 @@ function Orders({socket,user}) {
                                               <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
                                             </div>
                                             ):
-                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") ? (
+                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
                                               <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
                                                 <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
                                               </div>
