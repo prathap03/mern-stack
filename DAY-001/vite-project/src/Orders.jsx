@@ -353,14 +353,17 @@ function Orders({socket,user}) {
                           <h1 className="text-[0.8rem] font-semibold">{online[chat.id] ? online[chat.id] : chat.id}</h1>
                 
                         </div>
-                        <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
+              
                         {console.log(chat.message.split(" "))}
-                        {chat.message.toLowerCase().split(" ").includes("codeword") && (
+                        {chat.message.toLowerCase().split(" ").includes("codeword") ? (
                           <div className="overflow-hidden bg-red-500 rounded-b-lg">
-
                             <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
                           </div>
-                        )}
+                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") ? (
+                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                            <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
+                          </div>
+                        ):( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)}
                         </div>
                         
                       </div>
