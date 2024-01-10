@@ -316,18 +316,24 @@ function Orders({socket,user}) {
            <div className="flex flex-col gap-2 mt-5">
               <h1 className="text-[1.6rem]  font semibold">Chatrooom</h1>
             <div className="flex flex-col flex-grow overflow-scroll ">
-              <div className="w-full bg-white/[60%] flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
+              <div className="w-full bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
                 {chats?.map((chat) => {
                   console.log(chats)
                   return (
                     console.log(chat),
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
-                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-full bg-blue-400">{chat.message}</h1>
+                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>
                       </div>
                     ) : (
-                      <div className="flex w-full" key={chat.id}>
-                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-wrap rounded-full text-white p-2 bg-green-500">{chat.message}</h1>
+                      <div className="flex flex-col w-full" key={chat.id}>
+                        <div className="flex flex-col bg-green-500 rounded-lg shadow-md backdrop-blur-sm w-max">
+                        <div className="bg-gradient-to-tr rounded-t-lg from-white-600 to-violet-200 min-w-[8rem] p-2 max-w-[12rem]">
+                          <h1 className="text-[0.8rem] font-semibold">{online[chat.id] ? online[chat.id] : chat.id}</h1>
+                        </div>
+                        <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
+                        </div>
+                        
                       </div>
                     )
                   );
