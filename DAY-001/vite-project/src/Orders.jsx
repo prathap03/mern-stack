@@ -95,7 +95,7 @@ function Orders({socket,user}) {
       setChats((prevChats) => [...prevChats, chat]);
 
       if(chat.id != socket.id){
-        message.play()
+        await message.play()
       }
       if((chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🌈") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈")) && chat.id != socket.id){
         await gay.play()
@@ -361,7 +361,7 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden bg-red-500 rounded-b-lg">
                             <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
                           </div>
-                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") || chat.message.toLowerCase().split(" ").includes("boomer") ? (
+                        ): chat.message.toLowerCase().split(" ").includes("boomer") ? (
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>
@@ -414,7 +414,7 @@ function Orders({socket,user}) {
                                               <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
                                             </div>
                                             ):
-                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") ? (
+                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
                                               <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
                                                 <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
                                               </div>
