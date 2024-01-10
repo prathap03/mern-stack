@@ -355,7 +355,7 @@ function Orders({socket,user}) {
                         </div>
                         <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
                         {console.log(chat.message.split(" "))}
-                        {chat.message.split(" ").includes("codeword") && (
+                        {chat.message.toLowerCase().split(" ").includes("codeword") && (
                           <div className="overflow-hidden bg-red-500 rounded-b-lg">
 
                             <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
