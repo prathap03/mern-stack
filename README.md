@@ -1,4 +1,5 @@
 🔗Live Demo: https://mern-stack-one-murex.vercel.app/ 
+
 ⚠️Not Optimized for responsiveness (...yet)
 
 HTML/CSS & JS (Restarunt)
@@ -26,8 +27,6 @@ Live Order Board (CRUD Operation) (MERN & Socket.io)
 Live Chatroom (MERN & Socket.io)
 
 ![WhatsApp Image 2024-01-10 at 15 33 42_c541cfce](https://github.com/prathap03/mern-stack/assets/72980112/366fdc38-6f6c-40d7-a86e-1dc65ab420dd)
-
-![ItsGonnaTakeSomeBuildUpTimeDaveOlsonGIF](https://github.com/prathap03/mern-stack/assets/72980112/edfab1fe-c705-4f7e-ae81-a13cb3f46af7)
 
 ![IBetterGetFiveStarsMrBeastGIF](https://github.com/prathap03/mern-stack/assets/72980112/003865b3-afed-4c12-815a-79334b50fcc9)
 
