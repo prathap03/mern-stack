@@ -12,7 +12,7 @@ function Orders({socket,user}) {
   const [online,setOnline] = useState([])
   const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
-  const [send,setSend] = useState(false)
+  const [send,setSend] = useState(true)
   // const [viewPort,setViewPort] = useState({
   //   latitude: 37.7577,
   //   longitude: -122.4376,
@@ -359,6 +359,29 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>):
+                          chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
+                            <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                              <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
+                            </div>):
+                            chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ? (
+                              <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                              </div>):
+                              chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
+                                <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                  <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
+                                </div>
+                                ):
+                                chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
+                                  <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                    <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
+                                  </div>
+                                  ):
+                                  chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
+                                    <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                      <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
+                                    </div>
+                                    ):
                         ( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)}
                         
                       </div>
@@ -384,6 +407,29 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>):
+                          chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
+                            <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                              <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
+                            </div>):
+                             chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ? (
+                              <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                              </div>):
+                               chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
+                                <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                  <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
+                                </div>
+                                ):
+                                chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
+                                  <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                    <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
+                                  </div>
+                                  ):
+                                  chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
+                                    <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                      <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
+                                    </div>
+                                    ):
                         ( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)}
                         </div>
                         
@@ -404,7 +450,7 @@ function Orders({socket,user}) {
               </div>
               <div className="justify-center items-center w-[100%]  gap-2 flex p-2">
                 <h1 className="text-center">Enter is Send</h1>
-                <input onChange={(e)=>{setSend(e.target.checked)}} className="" type="checkbox" name="" id="" />
+                <input checked={send} onChange={(e)=>{setSend(e.target.checked)}} className="" type="checkbox" name="" id="" />
               </div>
             </div>
              </div>
