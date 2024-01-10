@@ -12,6 +12,7 @@ function Orders({socket,user}) {
   const [online,setOnline] = useState([])
   const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
+  const [send,setSend] = useState(false)
   // const [viewPort,setViewPort] = useState({
   //   latitude: 37.7577,
   //   longitude: -122.4376,
@@ -356,8 +357,17 @@ function Orders({socket,user}) {
                 <div ref={messagesEndRef} />
               </div>
               <div className="flex pt-2">
-                <input type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
-                <button onClick={()=>{Chat()}} className="p-2 text-white bg-green-500">SEND</button>
+                <input onKeyDown={(e)=>{
+                  if(send && e.key=="Enter"){
+                    // Chat()
+                    document.getElementById("chatbtn").click()
+                  }
+                }} type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
+                <button id={"chatbtn"}  onClick={()=>{Chat()}} className="p-2 text-white bg-green-500">SEND</button>
+              </div>
+              <div className="justify-center items-center w-[100%]  gap-2 flex p-2">
+                <h1 className="text-center">Enter is Send</h1>
+                <input onChange={(e)=>{setSend(e.target.checked)}} className="" type="checkbox" name="" id="" />
               </div>
             </div>
              </div>
