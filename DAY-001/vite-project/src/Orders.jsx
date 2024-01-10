@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Map, { Marker } from "react-map-gl"
 
 function Orders({socket,user}) {
@@ -12,13 +12,25 @@ function Orders({socket,user}) {
   const [online,setOnline] = useState([])
   const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
-  const [viewPort,setViewPort] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-    mapboxApiAccessToken: TOKEN,
-  })
+  // const [viewPort,setViewPort] = useState({
+  //   latitude: 37.7577,
+  //   longitude: -122.4376,
+  //   zoom: 8,
+  //   mapboxApiAccessToken: TOKEN,
+  // })
   add.volume = 0.5;
+
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [chats]);
+
+
   useEffect(() => {
     setLoading(true)
     console.log(user)
@@ -131,10 +143,13 @@ function Orders({socket,user}) {
   }
 
   const Chat = async()=>{
+    if(newChat=="") return
     await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/chat",{
       id:socket.id,
       message:newChat,
     })
+    setNewChat("")
+    document.getElementById("chat").scrollTo(0,document.getElementById("chat").scrollHeight)
     // setChats([...chats,{id:socket.id,message:newChat}])
   }
 
@@ -315,7 +330,7 @@ function Orders({socket,user}) {
   }
            <div className="flex flex-col gap-2 mt-5">
               <h1 className="text-[1.6rem]  font semibold">Chatrooom</h1>
-            <div className="flex flex-col flex-grow overflow-scroll ">
+            <div id={"chat"} className="flex flex-col flex-grow overflow-scroll ">
               <div className="w-full bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
                 {chats?.map((chat) => {
                   console.log(chats)
@@ -338,6 +353,7 @@ function Orders({socket,user}) {
                     )
                   );
                 })}
+                <div ref={messagesEndRef} />
               </div>
               <div className="flex pt-2">
                 <input type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
@@ -346,7 +362,7 @@ function Orders({socket,user}) {
             </div>
              </div>
 
-             <div className="flex flex-grow bg-white min-h-[20rem] min-w-[100%]">
+             {/* <div className="flex flex-grow bg-white min-h-[20rem] min-w-[100%]">
               <Map
               initialViewState={{
                 latitude: 11.101746050449977,
@@ -361,7 +377,7 @@ function Orders({socket,user}) {
               >
                 <Marker latitude={11.101746050449977} longitude={76.9657515678348} color="red" />
               </Map>
-             </div>
+             </div> */}
            </div>
           
      
