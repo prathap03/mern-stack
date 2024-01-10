@@ -114,7 +114,7 @@ app.post("/api/chat",async(req,res)=>{
   try{
     if(req.body.id){
       console.log(req.body.id)
-      io.of("/api/socket").to(req.body.id).emit("chat",req.body)
+      io.of("/api/socket").emit("chat",req.body)
       res.status(200).json({status:"ok"})
       return
     }

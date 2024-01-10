@@ -1,21 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import Map, { Marker } from "react-map-gl"
 
 function Orders({socket,user}) {
+  
+  const TOKEN = import.meta.env.MAPBOX_API_TOKEN || "pk.eyJ1IjoicHJhdGhhcDJrMyIsImEiOiJjbHI3OHd2MmYyYjgyMmxwbnQwZnIybmJuIn0.F0fxqdK2BklBgi2pxV3TFA"
   const [orders, setOrders] = useState([]);
   const [isLoading,setLoading] = useState(false)
   const [ready,setReady] = useState({status:false,id:""})
   const add = new Audio("https://cdn.pixabay.com/audio/2022/04/05/audio_c5c228d922.mp3");
   const [online,setOnline] = useState([])
-  const [chats,setChats] = useState([{
-    id:"1234",
-    message:"Hello"
-  },{
-    id:"123",
-    message:"Hi"
-  }])
+  const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
+  const [viewPort,setViewPort] = useState({
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 8,
+    mapboxApiAccessToken: TOKEN,
+  })
   add.volume = 0.5;
   useEffect(() => {
     setLoading(true)
@@ -72,9 +74,8 @@ function Orders({socket,user}) {
     
     });
 
-    socket.on("newChat",(chat)=>{
-      console.log(chat)
-      setChats([...chats,chat])
+    socket.on("chat",(chat)=>{
+      setChats((prevChats) => [...prevChats, chat]);
     })
 
     socket.on("alertAll",async()=>{
@@ -83,12 +84,7 @@ function Orders({socket,user}) {
       await add.play()
     })
 
-    const newChat = async()=>{
-      await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/newChat",{
-        id:socket.id,
-        message:newChat
-      })
-    }
+
 
     const fetchOrders = async () => {
       try {
@@ -132,6 +128,14 @@ function Orders({socket,user}) {
     } catch(err){
       console.log(err)}
   
+  }
+
+  const Chat = async()=>{
+    await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/chat",{
+      id:socket.id,
+      message:newChat,
+    })
+    // setChats([...chats,{id:socket.id,message:newChat}])
   }
 
   const prepareOrder = async(id)=>{
@@ -289,11 +293,11 @@ function Orders({socket,user}) {
         })}
       </div>
 
+      <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
       {user && (<button onClick={()=>{addOrder()}} className="p-2 mt-5 text-white bg-green-500 rounded-md shadow-md">Add Order</button>)}
         {user ?(
-             <div className=" mb-10 mt-10 w-[90%] p-2 gap-2 flex flex-col rounded-md shadow-md bg-gradient-to-tr from-yellow-200 to-slate-200">
           
-             {orders.map((order)=>{
+             orders.map((order)=>{
                return(
                  <div key={order._id} className="flex items-center gap-4 p-2 bg-white/[40%] rounded-md shadow-md backdrop-blur-md">
                    <h1>${order._id}</h1>
@@ -303,13 +307,20 @@ function Orders({socket,user}) {
                    </div>
                  </div>
                )
-             })}
-             <div className="flex flex-col gap-2 mt-5">
+             })
+    
+        ):(
+          <div className="flex flex-col items-center justify-center flex-grow">
+          <h1 className="text-lg font-semibold md:text-2xl animate-pulse">Login to see and place orders</h1></div>)
+  }
+           <div className="flex flex-col gap-2 mt-5">
               <h1 className="text-[1.6rem]  font semibold">Chatrooom</h1>
             <div className="flex flex-col flex-grow overflow-scroll ">
               <div className="w-full bg-white/[60%] flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
-                {chats && chats.map((chat) => {
+                {chats?.map((chat) => {
+                  console.log(chats)
                   return (
+                    console.log(chat),
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
                         <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-full bg-blue-400">{chat.message}</h1>
@@ -324,14 +335,29 @@ function Orders({socket,user}) {
               </div>
               <div className="flex pt-2">
                 <input type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
-                <button className="p-2 text-white bg-green-500">SEND</button>
+                <button onClick={()=>{Chat()}} className="p-2 text-white bg-green-500">SEND</button>
               </div>
             </div>
              </div>
+
+             <div className="flex flex-grow bg-white min-h-[20rem] min-w-[100%]">
+              <Map
+              initialViewState={{
+                latitude: 11.101746050449977,
+                longitude: 76.9657515678348,
+                
+                zoom: 16
+              }}
+              style={{width: "100%", height: "500"}}
+              mapboxAccessToken={TOKEN}
+              mapStyle={"mapbox://styles/prathap2k3/clr7dimiv01je01o36od0gfgj"}
+              transitionDuration="200"
+              >
+                <Marker latitude={11.101746050449977} longitude={76.9657515678348} color="red" />
+              </Map>
+             </div>
            </div>
-        ):(
-          <div className="flex flex-col items-center justify-center flex-grow">
-          <h1 className="text-lg font-semibold md:text-2xl animate-pulse">Login to see and place orders</h1></div>)}
+          
      
     
     </div>
