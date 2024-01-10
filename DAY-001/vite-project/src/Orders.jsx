@@ -344,7 +344,17 @@ function Orders({socket,user}) {
                     console.log(chat),
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
-                        <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>
+                                                {console.log(chat.message.split(" "))}
+                        {chat.message.toLowerCase().split(" ").includes("codeword") ? (
+                          <div className="overflow-hidden bg-red-500 rounded-b-lg">
+                            <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
+                          </div>
+                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") || chat.message.toLowerCase().split(" ").includes("boomer") ? (
+                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                            <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
+                          </div>
+                        ):( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)}
+                        
                       </div>
                     ) : (
                       <div className="flex flex-col w-full " key={chat.id}>
@@ -359,7 +369,7 @@ function Orders({socket,user}) {
                           <div className="overflow-hidden bg-red-500 rounded-b-lg">
                             <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
                           </div>
-                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") ? (
+                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") || chat.message.toLowerCase().split(" ").includes("boomer") ? (
                           <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
                             <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
                           </div>
