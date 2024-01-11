@@ -4,8 +4,9 @@ import App from './App.jsx'
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css'
 import { io } from 'socket.io-client';
+import { jwtDecode } from 'jwt-decode';
 
-const socket = io("https://mern-stack-backend-2zxg.onrender.com/api/socket",{query:{token:localStorage.getItem("token")}});
+const socket = io("https://mern-stack-backend-2zxg.onrender.com/api/socket",{query:{user:localStorage.getItem("token") ? jwtDecode(localStorage.getItem("token")): "anonymous"}});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
