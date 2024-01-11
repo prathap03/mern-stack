@@ -13,7 +13,8 @@ function Orders({socket,user}) {
   const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
   const [send,setSend] = useState(true)
-  const [anonymous,setAnonymous] = useState(true)
+  const [anonymous,setAnonymous] = useState(false)
+  const [typing,setTyping] = useState("")
 
   const gay = new Audio("gay.mp3");
   const message = new Audio("notification.mp3");
@@ -110,6 +111,13 @@ function Orders({socket,user}) {
       await add.play()
     })
 
+    socket.on("typing",(data)=>{
+      if(socket?.id !== data?.id){
+        setTyping(data?.name)
+      }
+      setTimeout(()=>{setTyping("")},5000)
+    })
+
 
 
     const fetchOrders = async () => {
@@ -136,9 +144,17 @@ function Orders({socket,user}) {
       socket.off("orderNotification",(readyOrder)=>{})
       socket.off("online",(online)=>{})
       socket.off("newChat",(chat)=>{})
+      socket.off("typing",(data)=>{})
   
     };
   }, [socket]);
+
+  const Typing = async(name)=>{
+    await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/type/",{
+      name:name,
+      id:socket.id
+    })
+  }
 
   const addOrder = async()=>{
     try{
@@ -355,7 +371,15 @@ function Orders({socket,user}) {
                   </h1>
                 </div>
             <div id={"chat"} className="flex flex-col flex-grow overflow-scroll ">
-              <div className="w-full bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
+             
+              <div className="w-full relative bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
+              {typing && (
+                <div className="sticky top-0 bottom-0 left-[50%]">
+                <div className="w-[100%] text-green-500 animate-pulse p-2 font-semibold bg-white/[50%] backdrop-blur-md shadow-md rounded-lg">
+                {typing} is typing.....
+                </div>
+              </div>
+              )}
                 {chats?.map((chat) => {
                   console.log(chats)
                   console.log(user)
@@ -530,7 +554,7 @@ function Orders({socket,user}) {
                     // Chat()
                     document.getElementById("chatbtn").click()
                   }
-                }} type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
+                }} type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value);Typing(user && user.name ? user.name : socket.id)}} className="w-full p-2 " name="" id="" />
                 <button id={"chatbtn"}  onClick={()=>{Chat()}} className="p-2 text-white bg-green-500">SEND</button>
               </div>
               <div className="flex ">

@@ -126,6 +126,20 @@ app.post("/api/chat",async(req,res)=>{
   }
 })
 
+app.post("/api/type",async(req,res)=>{
+  console.log(req.body)
+  try{
+    if(req.body.name){
+      console.log(req.body.name)
+      io.of("/api/socket").emit("typing",req.body)
+      res.status(200).json({status:"ok"})
+    }
+  }catch(err){
+    console.log(err)
+    res.status(201).json({status:err})
+  }
+})
+
 app.post("/api/alertAll",async(req,res)=>{
   try{
     if(req.body.id){
