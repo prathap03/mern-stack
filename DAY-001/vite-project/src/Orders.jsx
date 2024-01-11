@@ -13,6 +13,7 @@ function Orders({socket,user}) {
   const [chats,setChats] = useState([])
   const [newChat,setNewChat] = useState("")
   const [send,setSend] = useState(true)
+  const [anonymous,setAnonymous] = useState(true)
 
   const gay = new Audio("gay.mp3");
   const message = new Audio("notification.mp3");
@@ -160,7 +161,7 @@ function Orders({socket,user}) {
     await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/chat",{
       id:socket.id,
       message:newChat,
-      name:user.name ? user.name : "Anonymous",
+      name:user.name && !anonymous ? user.name : socket.id,
       isMember:user.isMember ? user.isMember : false,
     })
     setNewChat("")
@@ -435,9 +436,12 @@ function Orders({socket,user}) {
                       </div>
                     ) : (
                       <div className="flex flex-col w-full " key={chat.id}>
-                        <div className="flex flex-col bg-green-500 rounded-lg shadow-md backdrop-blur-sm w-max">
-                        <div className="bg-gradient-to-tr rounded-t-lg from-white-600 to-violet-200 min-w-[8rem] p-2 ">
-                          <h1 className="text-[0.8rem] font-semibold">{chat.name ? chat.name : chat.id}</h1>
+                        <div className={`${chat.isMember?"flex flex-col bg-gradient-to-tr from-blue-500  to-green-500   rounded-lg shadow-md backdrop-blur-sm w-max":"flex flex-col bg-green-400  rounded-lg shadow-md backdrop-blur-sm w-max"}`}>
+                        <div className="bg-gradient-to-tr flex items-center gap-1 rounded-t-lg from-yellow-500 to-violet-200 min-w-[8rem] p-2 ">
+                          <h1 className="text-[0.8rem] text-white font-semibold">{chat.name ? chat.name : chat.id}</h1>
+                          {chat.isMember && (
+                            <svg aria-label="Verified" className="scale-[75%] x1lliihq x1n2onr6" fill="rgb(0, 149, 246)" height="18" role="img" viewBox="0 0 40 40" width="18"><title>Verified</title><path d="M19.998 3.094 14.638 0l-2.972 5.15H5.432v6.354L0 14.64 3.094 20 0 25.359l5.432 3.137v5.905h5.975L14.638 40l5.36-3.094L25.358 40l3.232-5.6h6.162v-6.01L40 25.359 36.905 20 40 14.641l-5.248-3.03v-6.46h-6.419L25.358 0l-5.36 3.094Zm7.415 11.225 2.254 2.287-11.43 11.5-6.835-6.93 2.244-2.258 4.587 4.581 9.18-9.18Z" fill-rule="evenodd"></path></svg>
+                          )}
                 
                         </div>
               
@@ -527,9 +531,18 @@ function Orders({socket,user}) {
                 }} type="text"   value={newChat} onChange={(e)=>{setNewChat(e.target.value)}} className="w-full p-2 " name="" id="" />
                 <button id={"chatbtn"}  onClick={()=>{Chat()}} className="p-2 text-white bg-green-500">SEND</button>
               </div>
+              <div className="flex ">
               <div className="justify-center items-center w-[100%]  gap-2 flex p-2">
                 <h1 className="text-center">Enter is Send</h1>
                 <input checked={send} onChange={(e)=>{setSend(e.target.checked)}} className="" type="checkbox" name="" id="" />
+              </div>
+
+              {user && user.isMember && (
+                <div className="justify-center items-center w-[100%]  gap-2 flex p-2">
+                <h1 className="text-center">Anonymous</h1>
+                <input checked={anonymous} onChange={(e)=>{setAnonymous(e.target.checked)}} className="" type="checkbox" name="" id="" />
+              </div>
+              )}
               </div>
             </div>
              </div>
