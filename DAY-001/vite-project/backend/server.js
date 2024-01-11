@@ -197,7 +197,7 @@ app.post("/api/login", async (req, res) => {
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const token = jwt.sign(
-          { id: user._id, name: user.name, email: req.body.email },
+          { id: user._id, name: user.name, email: req.body.email,isMember:user.isMember },
           "srec",
           { expiresIn: '10s' }
         );

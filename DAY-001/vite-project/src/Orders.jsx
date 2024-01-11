@@ -353,6 +353,8 @@ function Orders({socket,user}) {
               <div className="w-full bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
                 {chats?.map((chat) => {
                   console.log(chats)
+                  console.log(user)
+                  console.log(user?.isMember)
                   return (
                     console.log(chat),
                     chat?.id === socket?.id ? (
@@ -438,7 +440,8 @@ function Orders({socket,user}) {
                         </div>
               
                         {console.log(chat.message.split(" "))}
-                        {user && user.isMember ? (
+                        {console.log(user.isMember)},
+                        {user ? (
                            chat.message.toLowerCase().split(" ").includes("codeword") ? (
                             <div className="overflow-hidden bg-red-500 rounded-b-lg">
                               <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
@@ -503,7 +506,6 @@ function Orders({socket,user}) {
                           ( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)
                         ) : (
                           <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
-                        
                         )}
                        
                         </div>
