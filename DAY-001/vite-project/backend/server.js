@@ -29,7 +29,7 @@ let users = {};
 io.of("/api/socket").on("connection",(socket)=>{
   console.log("socket.io: User connected: ",socket.id);
   console.log(socket.handshake)
-  let user = socket.handshake.query?.user && socket.handshake.query?.user.name!="anonymous" ? socket.handshake.query?.user : socket.id;
+  let user = socket.handshake.query?.user && socket.handshake.query?.user!="anonymous" ? socket.handshake.query?.user : socket.id;
   users[socket.id] = user && user ? user: socket.id;
   io.of("/api/socket").emit("online",users)
 

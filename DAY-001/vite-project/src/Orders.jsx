@@ -232,11 +232,13 @@ function Orders({socket,user}) {
             console.log(user)
             console.log(online[user])
             return(
-             <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
+             <div key={user} className="flex flex-grow justify-stat  items-center gap-2 w-[100%] md:w-[60%]">
                <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="anonymous" || online[user]!="" ? online[user] : user }
                <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500"/>
                </h1>
+               <div className="flex justify-end flex-grow">
                <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
+               </div>
              </div>
            )})}
             <button onClick={()=>{alertAll()}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Alert All</button>
