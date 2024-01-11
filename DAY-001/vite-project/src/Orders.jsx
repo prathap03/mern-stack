@@ -346,6 +346,7 @@ function Orders({socket,user}) {
                <div className=" animate-pulse absolute top-2 -right-2  min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] w-[0.6rem] h-[0.6rem] rounded-[100%] bg-green-500"/>
                 <h1>
                 Live Chatrooom
+                <h1 className="md:text-[0.8rem] w-max p-1 font-semibold backdrop-blur-sm text-white bg-green-500/[99%] text-center shadow-md text-[0.4rem]  rounded-full">Currently Online: {Object.keys(online).length}</h1>
                   </h1>
                 </div>
             <div id={"chat"} className="flex flex-col flex-grow overflow-scroll ">
