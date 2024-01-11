@@ -443,7 +443,7 @@ function Orders({socket,user}) {
               
                         {console.log(chat.message.split(" "))}
                         {console.log(user.isMember)}
-                        {user && chat.isMember ? (
+                        {chat.isMember ? (
                            chat.message.toLowerCase().split(" ").includes("codeword") ? (
                             <div className="overflow-hidden bg-red-500 rounded-b-lg">
                               <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
