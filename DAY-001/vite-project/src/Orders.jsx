@@ -358,69 +358,75 @@ function Orders({socket,user}) {
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
                                                 {console.log(chat.message.split(" "))}
-                        {chat.message.toLowerCase().split(" ").includes("codeword") ? (
-                          <div className="overflow-hidden bg-red-500 rounded-b-lg">
-                            <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
-                          </div>
-                        ): chat.message.toLowerCase().split(" ").includes("boomer") ? (
-                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                            <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
-                          </div>
-                        ): 
-                        chat.message.toLowerCase().split(" ").includes("motor") ? (
-                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                            <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
-                          </div>):
-                          chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
+                        {user && user.isMember ? (
+                          chat.message.toLowerCase().split(" ").includes("codeword") ? (
+                            <div className="overflow-hidden bg-red-500 rounded-b-lg">
+                              <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
+                            </div>
+                          ): chat.message.toLowerCase().split(" ").includes("boomer") ? (
                             <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                              <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
+                              <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
+                            </div>
+                          ): 
+                          chat.message.toLowerCase().split(" ").includes("motor") ? (
+                            <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                              <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
                             </div>):
-                            chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ?  (
-                              ()=>{gay.play()},
+                            chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
                               <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                                <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
                               </div>):
-                              chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
+                              chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ?  (
+                                ()=>{gay.play()},
                                 <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                  <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
-                                </div>
-                                ):
-                                chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
-                                  <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                    <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
+                                  <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                                </div>):
+                                chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
+                                  <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                    <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
                                   </div>
                                   ):
-                                  chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
+                                  chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
                                     <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                      <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
+                                      <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
                                     </div>
                                     ):
-                                    chat.message.toLowerCase().split(" ").includes("ea") || chat.message.toLowerCase().split(" ").includes("ltts") ? (
+                                    chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
                                       <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                        <img src="arul.jpg" alt="" className="w-[100%] h-[100%]" />
+                                        <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
                                       </div>
                                       ):
-                                      chat.message.toLowerCase().split(" ").includes("inba") || chat.message.toLowerCase().split(" ").includes("💪") || chat.message.toLowerCase().split(" ").includes("vr") ? (
+                                      chat.message.toLowerCase().split(" ").includes("ea") || chat.message.toLowerCase().split(" ").includes("ltts") ? (
                                         <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                          <img src="inba.gif" alt="" className="w-[100%] h-[100%]" />
+                                          <img src="arul.jpg" alt="" className="w-[100%] h-[100%]" />
                                         </div>
                                         ):
-                                        chat.message.toLowerCase().split(" ").includes("joe") || chat.message.toLowerCase().split(" ").includes("💻") || chat.message.toLowerCase().split(" ").includes("pcoder") ? (
+                                        chat.message.toLowerCase().split(" ").includes("inba") || chat.message.toLowerCase().split(" ").includes("💪") || chat.message.toLowerCase().split(" ").includes("vr") ? (
                                           <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                            <img src="https://media1.tenor.com/m/KkerOljBwakAAAAd/computer-nerd.gif" alt="" className="w-[100%] h-[100%]" />
+                                            <img src="inba.gif" alt="" className="w-[100%] h-[100%]" />
                                           </div>
                                           ):
-                                          chat.message.toLowerCase().split(" ").includes("69") || chat.message.toLowerCase().split(" ").includes("6️⃣9️⃣") || chat.message.toLowerCase().split(" ").includes("flutter") ? (
+                                          chat.message.toLowerCase().split(" ").includes("joe") || chat.message.toLowerCase().split(" ").includes("💻") || chat.message.toLowerCase().split(" ").includes("pcoder") ? (
                                             <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                              <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
+                                              <img src="https://media1.tenor.com/m/KkerOljBwakAAAAd/computer-nerd.gif" alt="" className="w-[100%] h-[100%]" />
                                             </div>
                                             ):
-                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
+                                            chat.message.toLowerCase().split(" ").includes("69") || chat.message.toLowerCase().split(" ").includes("6️⃣9️⃣") || chat.message.toLowerCase().split(" ").includes("flutter") ? (
                                               <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                                <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
+                                                <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
                                               </div>
                                               ):
-                        ( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)}
+                                              chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
+                                                <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                                  <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
+                                                </div>
+                                                ):
+                          ( <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>)
+                          
+                        ):(
+                          <h1 className="w-max min-w-[12rem] max-w-[8rem] text-white text-wrap p-2 rounded-lg bg-blue-400">{chat.message}</h1>
+                        )}
+                        
                         
                       </div>
                     ) : (
@@ -432,68 +438,74 @@ function Orders({socket,user}) {
                         </div>
               
                         {console.log(chat.message.split(" "))}
-                        {chat.message.toLowerCase().split(" ").includes("codeword") ? (
-                          <div className="overflow-hidden bg-red-500 rounded-b-lg">
-                            <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
-                          </div>
-                        ): chat.message.toLowerCase().split(" ").includes("🔥+💧") || chat.message.toLowerCase().split(" ").includes("boomer") ? (
-                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                            <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
-                          </div>
-                        ):
-                        chat.message.toLowerCase().split(" ").includes("motor") ? (
-                          <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                            <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
-                          </div>):
-                          chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
+                        {user && user.isMember ? (
+                           chat.message.toLowerCase().split(" ").includes("codeword") ? (
+                            <div className="overflow-hidden bg-red-500 rounded-b-lg">
+                              <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
+                            </div>
+                          ): chat.message.toLowerCase().split(" ").includes("🔥+💧") || chat.message.toLowerCase().split(" ").includes("boomer") ? (
                             <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                              <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
+                              <img src="2105104.jpg" alt="" className="w-[100%] h-[100%]" />
+                            </div>
+                          ):
+                          chat.message.toLowerCase().split(" ").includes("motor") ? (
+                            <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                              <img src="mohan.jpg" alt="" className="w-[100%] h-[100%]" />
                             </div>):
-                             chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ? (
+                            chat.message.toLowerCase().split(" ").includes("thalaforareason") || chat.message.toLowerCase().split(" ").includes("7") ? (
                               <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                                <img src="edwin.jpg" alt="" className="w-[100%] h-[100%]" />
                               </div>):
-                               chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
+                               chat.message.toLowerCase().split(" ").includes("gay") || chat.message.toLowerCase().split(" ").includes("🏳️‍🌈") || chat.message.toLowerCase().split(" ").includes("🌈") ? (
                                 <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                  <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
-                                </div>
-                                ):
-                                chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
+                                  <img src="2105117.jpg" alt="" className="w-[100%] h-[100%]" />
+                                </div>):
+                                 chat.message.toLowerCase().split(" ").includes("🗿") || chat.message.toLowerCase().split(" ").includes("sigma") || chat.message.toLowerCase().split(" ").includes("kanda") ? (
                                   <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                    <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
+                                    <img src="kanda.jpg" alt="" className="w-[100%] h-[100%]" />
                                   </div>
                                   ):
-                                  chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
-                                    <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                      <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
+                                  chat.message.toLowerCase().split(" ").includes("sniper") || chat.message.toLowerCase().split(" ").includes("🎯") || chat.message.toLowerCase().split(" ").includes("🐅") ? (
+                                    <div className="overflow-hidden max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                      <img src="siva.jpg" alt="" className="w-[100%] h-[100%]" />
                                     </div>
                                     ):
-                                    chat.message.toLowerCase().split(" ").includes("ea") || chat.message.toLowerCase().split(" ").includes("ltts") ? (
+                                    chat.message.toLowerCase().split(" ").includes("🥚") || chat.message.toLowerCase().split(" ").includes("namakkal") || chat.message.toLowerCase().split(" ").includes("puffs") ? (
                                       <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                        <img src="arul.jpg" alt="" className="w-[100%] h-[100%]" />
+                                        <img src="digeesh.gif" alt="" className="w-[100%] h-[100%]" />
                                       </div>
                                       ):
-                                      chat.message.toLowerCase().split(" ").includes("inba") || chat.message.toLowerCase().split(" ").includes("💪") || chat.message.toLowerCase().split(" ").includes("vr") ? (
+                                      chat.message.toLowerCase().split(" ").includes("ea") || chat.message.toLowerCase().split(" ").includes("ltts") ? (
                                         <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                          <img src="inba.gif" alt="" className="w-[100%] h-[100%]" />
+                                          <img src="arul.jpg" alt="" className="w-[100%] h-[100%]" />
                                         </div>
                                         ):
-                                        chat.message.toLowerCase().split(" ").includes("joe") || chat.message.toLowerCase().split(" ").includes("💻") || chat.message.toLowerCase().split(" ").includes("pcoder") ? (
+                                        chat.message.toLowerCase().split(" ").includes("inba") || chat.message.toLowerCase().split(" ").includes("💪") || chat.message.toLowerCase().split(" ").includes("vr") ? (
                                           <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                            <img src="https://media1.tenor.com/m/KkerOljBwakAAAAd/computer-nerd.gif" alt="" className="w-[100%] h-[100%]" />
+                                            <img src="inba.gif" alt="" className="w-[100%] h-[100%]" />
                                           </div>
                                           ):
-                                          chat.message.toLowerCase().split(" ").includes("69") || chat.message.toLowerCase().split(" ").includes("6️⃣9️⃣") || chat.message.toLowerCase().split(" ").includes("flutter") ? (
+                                          chat.message.toLowerCase().split(" ").includes("joe") || chat.message.toLowerCase().split(" ").includes("💻") || chat.message.toLowerCase().split(" ").includes("pcoder") ? (
                                             <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                              <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
+                                              <img src="https://media1.tenor.com/m/KkerOljBwakAAAAd/computer-nerd.gif" alt="" className="w-[100%] h-[100%]" />
                                             </div>
                                             ):
-                                            chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
+                                            chat.message.toLowerCase().split(" ").includes("69") || chat.message.toLowerCase().split(" ").includes("6️⃣9️⃣") || chat.message.toLowerCase().split(" ").includes("flutter") ? (
                                               <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
-                                                <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
+                                                <img src="shaan.jpg" alt="" className="w-[100%] h-[100%]" />
                                               </div>
                                               ):
-                        ( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)}
+                                              chat.message.toLowerCase().split(" ").includes("maya") || chat.message.toLowerCase().split(" ").includes("amala") || chat.message.toLowerCase().split(" ").includes("panda") || chat.message.toLowerCase().split(" ").includes("rashmika") || chat.message.toLowerCase().split(" ").includes("messi") || chat.message.toLowerCase().split(" ").includes("jenifer") ? (
+                                                <div className="overflow-hidden rounded-lg max-h-[16em] max-w-[15rem] rounded-b-lg">
+                                                  <img src="dj.jpg" alt="" className="w-[100%] h-[100%]" />
+                                                </div>
+                                                ):
+                          ( <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>)
+                        ) : (
+                          <h1 className="w-max max-w-[12rem] min-w-[8rem] text-wrap text-white p-2 ">{chat.message}</h1>
+                        
+                        )}
+                       
                         </div>
                         
                       </div>
