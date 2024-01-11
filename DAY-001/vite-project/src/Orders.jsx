@@ -374,10 +374,12 @@ function Orders({socket,user}) {
              
               <div className="w-full relative bg-white/[60%] overflow-scroll flex flex-col gap-2 p-2 backdrop-blur-sm h-[30rem] rounded-md shadow-md">
               {typing && (
-                <div className="sticky top-0 bottom-0 left-[50%]">
-                <div className="w-[100%] text-green-500 animate-pulse p-2 font-semibold bg-white/[50%] backdrop-blur-md shadow-md rounded-lg">
+                <div className="sticky m-0 -top-2 bottom-0 flex justify-end w-[100%]">
+                <div className="w-[100%] flex justify-end z-1 text-green-500  p-2 font-semibold bg-white/[90%] backdrop-blur-md shadow-md rounded-b-lg">
+                <h1 className="animate-pulse">
                 {typing} is typing.....
-                </div>
+
+                  </h1>                </div>
               </div>
               )}
                 {chats?.map((chat) => {
@@ -387,7 +389,7 @@ function Orders({socket,user}) {
                   return (
                     console.log(chat),
                     chat?.id === socket?.id ? (
-                      <div className="flex justify-end w-ful" key={chat.id}>
+                      <div className="flex justify-end w-full -z-10" key={chat.id}>
                                                 {console.log(chat.message.split(" "))}
                         {chat.isMember ? (
                           chat.message.toLowerCase().split(" ").includes("codeword") ? (
@@ -461,7 +463,7 @@ function Orders({socket,user}) {
                         
                       </div>
                     ) : (
-                      <div className="flex flex-col w-full " key={chat.id}>
+                      <div className="flex flex-col w-full -z-10 " key={chat.id}>
                         <div className={`${chat.isMember ?"flex flex-col bg-gradient-to-tr from-blue-500  to-green-500   rounded-lg shadow-md backdrop-blur-sm w-max":"flex flex-col bg-green-400  rounded-lg shadow-md backdrop-blur-sm w-max"}`}>
                         <div className="bg-gradient-to-tr flex items-center gap-1 rounded-t-lg from-yellow-500 to-violet-200 min-w-[8rem] p-2 ">
                           <h1 className="text-[0.8rem] text-white font-semibold">{chat.name ? chat.name : chat.id}</h1>
