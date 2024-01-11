@@ -160,6 +160,8 @@ function Orders({socket,user}) {
     await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/chat",{
       id:socket.id,
       message:newChat,
+      name:user.name ? user.name : "Anonymous",
+      isMember:user.isMember ? user.isMember : false,
     })
     setNewChat("")
     document.getElementById("chat").scrollTo(0,document.getElementById("chat").scrollHeight)
@@ -360,7 +362,7 @@ function Orders({socket,user}) {
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
                                                 {console.log(chat.message.split(" "))}
-                        {user ? (
+                        {user && chat.isMember ? (
                           chat.message.toLowerCase().split(" ").includes("codeword") ? (
                             <div className="overflow-hidden bg-red-500 rounded-b-lg">
                               <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
@@ -435,13 +437,13 @@ function Orders({socket,user}) {
                       <div className="flex flex-col w-full " key={chat.id}>
                         <div className="flex flex-col bg-green-500 rounded-lg shadow-md backdrop-blur-sm w-max">
                         <div className="bg-gradient-to-tr rounded-t-lg from-white-600 to-violet-200 min-w-[8rem] p-2 ">
-                          <h1 className="text-[0.8rem] font-semibold">{online[chat.id] ? online[chat.id] : chat.id}</h1>
+                          <h1 className="text-[0.8rem] font-semibold">{chat.name ? chat.name : chat.id}</h1>
                 
                         </div>
               
                         {console.log(chat.message.split(" "))}
-                        {console.log(user.isMember)},
-                        {user ? (
+                        {console.log(user.isMember)}
+                        {user && chat.isMember ? (
                            chat.message.toLowerCase().split(" ").includes("codeword") ? (
                             <div className="overflow-hidden bg-red-500 rounded-b-lg">
                               <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
