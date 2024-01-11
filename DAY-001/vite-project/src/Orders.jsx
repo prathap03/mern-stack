@@ -233,7 +233,7 @@ function Orders({socket,user}) {
             console.log(online[user])
             return(
              <div key={user} className="flex flex-grow justify-evenly items-center gap-2 w-[100%] md:w-[60%]">
-               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="" ? online[user] : user }
+               <h1 className="md:text-[1.2rem]  relative text-[0.8rem]">{online[user]!="anonymous" || online[user]!="" ? online[user] : user }
                <div className="absolute -right-2 animate-pulse top-0 min-h-[0.6rem] shadow-sm shadow-green-400 min-w-[0.6rem] rounded-[100%] bg-green-500"/>
                </h1>
                <button onClick={()=>{alertUser(user)}} className="p-2 text-white bg-green-500 rounded-md shadow-md">Notify</button>
@@ -436,7 +436,7 @@ function Orders({socket,user}) {
                       </div>
                     ) : (
                       <div className="flex flex-col w-full " key={chat.id}>
-                        <div className={`${chat.isMember?"flex flex-col bg-gradient-to-tr from-blue-500  to-green-500   rounded-lg shadow-md backdrop-blur-sm w-max":"flex flex-col bg-green-400  rounded-lg shadow-md backdrop-blur-sm w-max"}`}>
+                        <div className={`${chat.isMember ?"flex flex-col bg-gradient-to-tr from-blue-500  to-green-500   rounded-lg shadow-md backdrop-blur-sm w-max":"flex flex-col bg-green-400  rounded-lg shadow-md backdrop-blur-sm w-max"}`}>
                         <div className="bg-gradient-to-tr flex items-center gap-1 rounded-t-lg from-yellow-500 to-violet-200 min-w-[8rem] p-2 ">
                           <h1 className="text-[0.8rem] text-white font-semibold">{chat.name ? chat.name : chat.id}</h1>
                           {chat.isMember && (
