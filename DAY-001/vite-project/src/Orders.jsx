@@ -360,7 +360,7 @@ function Orders({socket,user}) {
                     chat?.id === socket?.id ? (
                       <div className="flex justify-end w-ful" key={chat.id}>
                                                 {console.log(chat.message.split(" "))}
-                        {user && user.isMember ? (
+                        {user ? (
                           chat.message.toLowerCase().split(" ").includes("codeword") ? (
                             <div className="overflow-hidden bg-red-500 rounded-b-lg">
                               <img src="https://media.tenor.com/NkfNBoWQnBMAAAAM/superstarksa-po-po.gif" alt="" />
