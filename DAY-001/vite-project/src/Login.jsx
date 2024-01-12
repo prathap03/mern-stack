@@ -22,7 +22,7 @@ export default function Login({socket}) {
       alert("Please fill all the details");
       return;
     }
-    const res = await fetch("https://mern-stack-backend-2zxg.onrender.com/api/login", {
+    const res = await fetch(`${import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : import.meta.env.VITE_LOCAL_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export default function Login({socket}) {
         localStorage.setItem("token", user);
         console.log(user);
         console.log(socket.id)
-        await axios.post("https://mern-stack-backend-2zxg.onrender.com/api/socketId",{
+        await axios.post(`${import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : import.meta.env.VITE_LOCAL_URL}/api/socketId`,{
           email: email,
           id: socket.id,
         })
@@ -59,7 +59,7 @@ export default function Login({socket}) {
       alert("Please fill all the details");
       return;
     }
-    const res = await fetch("https://mern-stack-backend-2zxg.onrender.com/api/register", {
+    const res = await fetch(`${import.meta.env.PROD ? import.meta.env.VITE_SERVER_URL : import.meta.env.VITE_LOCAL_URL}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

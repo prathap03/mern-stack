@@ -16,9 +16,10 @@ export default function NavBar({props: { user, setUser }}) {
           <Link className="transition-all hover:text-blue-500" to="/HireMe">Hire Me</Link>
           <Link className="transition-all hover:text-blue-500" to="/useState">useState</Link>
           <Link className="transition-all hover:text-blue-500" to="/login">Login</Link>
-          <Link className="transition-all hover:text-blue-500" to="/useReducer">useReducer</Link>
-          <Link className="transition-all hover:text-blue-500" to="/useMemo">useMemo</Link>
+          {/* <Link className="transition-all hover:text-blue-500" to="/useReducer">useReducer</Link> */}
+          {/* <Link className="transition-all hover:text-blue-500" to="/useMemo">useMemo</Link> */}
           <Link className="transition-all hover:text-blue-500" to="/orders">Orders</Link>
+          <Link className="transition-all hover:text-blue-500" to="/scribble">Scribble</Link>
           {user && ( <button onClick={()=>Logout()} className="p-1 w-[5rem] hover:bg-blue-700 transition-all active:scale-90 font-semibold text-white bg-blue-500 rounded-md shadow-sm">Logout</button>)}
          
         </div>

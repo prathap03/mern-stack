@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Order = require("./models/order.model")
 const jwt = require("jsonwebtoken");
+require('dotenv').config()
+
 
 const app = express();
 
@@ -53,7 +55,7 @@ io.of("/api/socket").on("connection",(socket)=>{
 
 
 
-mongoose.connect("mongodb+srv://joeprathap123:joeprathap123@cluster0.qgfc2.mongodb.net/mern-stack");
+mongoose.connect(process.env.MONGO_DB_URI);
 
 const connection = mongoose.connection;
 
