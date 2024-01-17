@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
-
+import PropTypes from 'prop-types';
 export default function NavBar({props: { user, setUser }}) {
-  const navigate = useNavigate();
-
+  NavBar.propTypes = {
+    props:PropTypes.object.isRequired
+  }
   const Logout = ()=>{
     localStorage.removeItem("token")
     setUser("")

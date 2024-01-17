@@ -1,6 +1,25 @@
 import React from 'react'
 
 function Scribble() {
+
+
+    const getLocation = ()=>{
+        if (!navigator.geolocation) {
+          console.log('Geolocation API not supported by this browser.');
+          getLocation();
+          //handle supabase
+        } else {
+          console.log('Checking location...');
+          navigator.geolocation.getCurrentPosition((success, error)=>{
+            console.log(success, error);
+            if(success){
+              console.log('Latitude:', success.coords.latitude);
+              console.log('Longitude:', success.coords.longitude);
+              //handle supabase
+            }
+          });
+        }
+      }
   return (
     <div className='flex justify-center bg-blue-400 p-[2rem] items-center flex-col min-h-[100%] flex-grow'>
         <div className='flex flex-col min-h-[50%] flex-grow p-2 min-w-[90%]'>
@@ -44,6 +63,7 @@ function Scribble() {
                 <div className='flex flex-grow h-[3rem] justify-center items-center'>
                     <input value={""} placeholder='Hover to copy link' className='text-blue-500 text-[1rem] text-center p-2 h-[100%] w-[50%]' type="text" />
                     <button className='p-2 text-[1rem] h-[100%] bg-blue-500'>Copy</button>
+                    <button  onMouseOver="(this.type='file')" onMouseOut="(this.type='button')" onClick={()=>getLocation()} className='p-2 ml-2 text-[1rem] h-[100%] bg-blue-500'>get location</button>
                 </div>
             </div>
         </div>

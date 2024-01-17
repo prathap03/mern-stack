@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 export default function Login({socket}) {
   const [switchLayout, setSwitchLayout] = useState(false);
@@ -9,6 +10,10 @@ export default function Login({socket}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  Login.prototype = {
+    socket: PropTypes.object.isRequired
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {

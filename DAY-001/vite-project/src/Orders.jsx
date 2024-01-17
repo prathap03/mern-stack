@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import Map, { Marker } from "react-map-gl";
 import PropTypes from 'prop-types';
 
 function Orders({ user, socket }) {
@@ -28,12 +27,6 @@ function Orders({ user, socket }) {
   const gay = new Audio("gay.mp3");
   const message = new Audio("notification.mp3");
   message.volume = 0.5;
-  // const [viewPort,setViewPort] = useState({
-  //   latitude: 37.7577,
-  //   longitude: -122.4376,
-  //   zoom: 8,
-  //   mapboxApiAccessToken: TOKEN,
-  // })
   add.volume = 0.5;
 
   const messagesEndRef = useRef(null);

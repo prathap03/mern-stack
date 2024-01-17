@@ -11,8 +11,8 @@ import UseMemo from "./UseMemo";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import Orders from "./Orders";
-import { socketConnection } from "./utils/socketHandleInitilizer";
 import Scribble from "./Scribble";
+import VCard from "./VCard";
 
 
 function App({socket}) {
@@ -49,6 +49,7 @@ function App({socket}) {
         <Route path="/useReducer" element={<UseReducer/>} />
         <Route path="/useMemo" element={<UseMemo/>} />
         <Route path="/scribble" element={<Scribble/>} />
+        <Route path="/vcard" element={<VCard/>} />
         <Route path="orders" element={<Orders user={user} socket={socket}/>}/>
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
